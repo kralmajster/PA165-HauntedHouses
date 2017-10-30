@@ -16,8 +16,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
- * Author: Klara Kufova, 410091.
- * Created on Oct 21, 2017.
+ * @author Klara Kufova, 410091
  */
 
 @Entity

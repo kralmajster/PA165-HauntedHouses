@@ -11,8 +11,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 /**
- * Author: Klara Kufova, 410091.
- * Created on Oct 22, 2017.
+ * @author Klara Kufova, 410091
  */
 
 @Repository

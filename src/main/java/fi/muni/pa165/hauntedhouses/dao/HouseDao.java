@@ -5,8 +5,7 @@ import fi.muni.pa165.hauntedhouses.entity.House;
 import java.util.List;
 
 /**
- * Author: Klara Kufova, 410091.
- * Created on Oct 22, 2017.
+ * @author Klara Kufova, 410091
  */
 
 public interface HouseDao {

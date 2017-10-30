@@ -20,8 +20,9 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.*;
 
 /**
- * Author: Klara Kufova, 410091. Created on Oct 30, 2017.
+ * @author Klara Kufova, 410091
  */
+
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
