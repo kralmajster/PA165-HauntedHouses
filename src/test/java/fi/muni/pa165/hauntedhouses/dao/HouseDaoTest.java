@@ -19,6 +19,12 @@ import org.testng.annotations.Test;
 import fi.muni.pa165.hauntedhouses.PersistenceApplicationContext;
 import fi.muni.pa165.hauntedhouses.entity.House;
 
+/**
+ * 
+ * @author Mario Majernik, 422165
+ *
+ */
+
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
