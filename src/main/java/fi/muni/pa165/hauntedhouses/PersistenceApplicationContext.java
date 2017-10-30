@@ -4,10 +4,13 @@ import fi.muni.pa165.hauntedhouses.dao.AbilityDao;
 import fi.muni.pa165.hauntedhouses.dao.GhostDao;
 import fi.muni.pa165.hauntedhouses.dao.HouseDao;
 import fi.muni.pa165.hauntedhouses.dao.PersonDao;
+
 import org.hibernate.jpa.HibernatePersistenceProvider;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.instrument.classloading.LoadTimeWeaver;
@@ -20,34 +23,28 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {PersonDao.class, AbilityDao.class, GhostDao.class, HouseDao.class},
-            basePackages = "cz.fi.muni.pa165.")
+@ComponentScan(
+        basePackageClasses = {PersonDao.class, AbilityDao.class, GhostDao.class, HouseDao.class},
+        basePackages = "cz.fi.muni.pa165.")
 public class PersistenceApplicationContext {
-    
-    /**
-     * Enables automatic translation of exceptions to DataAccessExceptions.
-     */
+
     @Bean
     public PersistenceExceptionTranslationPostProcessor postProcessor() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
-    
+
     @Bean
-    public JpaTransactionManager transactionManager(){
-        return  new JpaTransactionManager(entityManagerFactory().getObject());
+    public JpaTransactionManager transactionManager() {
+        return new JpaTransactionManager(entityManagerFactory().getObject());
     }
-    /**
-     * Starts up a container that emulates behavior prescribed in JPA spec for container-managed EntityManager
-     * @return
-     */
+
     @Bean
-    public LocalContainerEntityManagerFactoryBean  entityManagerFactory(){
-        LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean ();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();
         jpaFactoryBean.setDataSource(db());
         jpaFactoryBean.setLoadTimeWeaver(instrumentationLoadTimeWeaver());
         jpaFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
@@ -65,9 +62,10 @@ public class PersistenceApplicationContext {
     }
 
     @Bean
-    public DataSource db(){
+    public DataSource db() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.DERBY).build();
-        return db;
+        EmbeddedDatabase database = builder.setType(EmbeddedDatabaseType.DERBY).build();
+        return database;
     }
+    
 }
