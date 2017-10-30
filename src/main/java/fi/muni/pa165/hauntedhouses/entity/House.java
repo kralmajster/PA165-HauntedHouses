@@ -1,13 +1,17 @@
 package fi.muni.pa165.hauntedhouses.entity;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -39,6 +43,15 @@ public class House {
 
     @NotNull
     private String history;
+    
+    @NotNull
+    private Long ownerID;
+    
+    @OneToMany
+    private Set<Ghost> ghosts = new HashSet<>();
+
+    @OneToMany
+    private Set<Person> residents = new HashSet<>();
 
     // Constructors:
     public House() {
@@ -48,11 +61,12 @@ public class House {
         this.id = houseID;
     }
     
-    public House(String name, String address, Date becameHauntedDate, String history) {
+    public House(String name, String address, Date becameHauntedDate, String history, Long ownerID) {
         this.name = name;
         this.address = address;
         this.becameHauntedDate = becameHauntedDate;
         this.history = history;
+        this.ownerID = ownerID;
     }
 
     // Setters and getters:
@@ -96,10 +110,51 @@ public class House {
         return history;
     }
     
+    public void setOwnerID(Long ownerID) {
+        this.ownerID = ownerID;
+    }
+    
+    public Long getOwnerID() {
+        return ownerID;
+    }
+    
+    public void setGhosts(Set<Ghost> ghosts) {
+        this.ghosts = ghosts;
+    }
+    
+    public Set<Ghost> getGhosts() {
+        return Collections.unmodifiableSet(ghosts);
+    }
+    
+    public void addGhost(Ghost ghost) {
+        ghosts.add(ghost);
+    }
+    
+    public void removeGhost(Ghost ghost) {
+        this.ghosts.remove(ghost);
+    }
+    
+    public void setResidents(Set<Person> residents) {
+        this.residents = residents;
+    }
+    
+    public Set<Person> getResidents() {
+        return Collections.unmodifiableSet(residents);
+    }
+    
+    public void addResident(Person resident) {
+        residents.add(resident);
+    }
+    
+    public void removeResident(Person resident) {
+        this.residents.remove(resident);
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 13;
-        return prime + ((name == null) ? 0 : name.hashCode());
+        return prime + ((name == null) ? 0 : name.hashCode())
+                     + ((address == null) ? 0 : address.hashCode());
     }
 
     @Override
@@ -110,14 +165,11 @@ public class House {
         if ((object == null) || !(object instanceof House)) {
             return false;
         }
+        
         House other = (House) object;
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.address, other.address)) {
-            return false;
-        }
-        return true;
+        
+        if (getName() != null ? !getName().equals(other.getName()) : other.getName() != null) return false;
+        return getAddress() != null ? getAddress().equals(other.getAddress()) : other.getAddress() == null;
     }
 
 }
