@@ -3,7 +3,6 @@ package fi.muni.pa165.hauntedhouses.entity;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import javax.validation.constraints.NotNull;
 
 /**
@@ -55,18 +53,6 @@ public class House {
 
     // Constructors:
     public House() {
-    }
-
-    public House(Long houseID) {
-        this.id = houseID;
-    }
-    
-    public House(String name, String address, Date becameHauntedDate, String history, Long ownerID) {
-        this.name = name;
-        this.address = address;
-        this.becameHauntedDate = becameHauntedDate;
-        this.history = history;
-        this.ownerID = ownerID;
     }
 
     // Setters and getters:

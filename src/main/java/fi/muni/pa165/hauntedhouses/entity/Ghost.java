@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -47,31 +49,14 @@ public class Ghost {
     private String hauntReason;
     
     @NotNull
+    @ManyToOne(mappedBy = "ghosts")
     private long idHouse;
     
-    private Set<String> abilities = new HashSet<>();    //Then change String to ability
+    @ManyToMany
+    private Set<Ability> abilities = new HashSet<>();
     
     //Constructors
     public Ghost() {
-    }
-    
-    public Ghost(long id, String name, Date hauntFrom, Date hauntTo) {
-        this.id = id;
-        this.name = name;
-        this.hauntFrom = hauntFrom;
-        this.hauntTo = hauntTo;
-    }
-    
-    public Ghost(long id, String name, Date hauntFrom, Date hauntTo, String description, String hauntReason,
-            long idHouse, Set<String> abilities) {
-        this.id = id;
-        this.name = name;
-        this.hauntFrom = hauntFrom;
-        this.hauntTo = hauntTo;
-        this.description = description;
-        this.hauntReason = hauntReason;
-        this.idHouse = idHouse;
-        this.abilities.addAll(abilities);
     }
     
     //Getters and setters
@@ -131,18 +116,22 @@ public class Ghost {
         this.idHouse = idHouse;
     }
     
-    public Set<String> getAbilities() {        //Then change String to ability
+    public Set<Ability> getAbilities() {
         return Collections.unmodifiableSet(abilities);
     }
     
-    public void setAbilities(Set<String> abilities) {        //Then change String to ability
+    public void setAbilities(Set<Ability> abilities) {
         this.abilities = abilities;
     }
     
-    public void addAbility(String ability) {        //Then change String to ability
+    public void addAbility(Ability ability) {
         this.abilities.add(ability);
     }
     
+    public void removeAbility(Ability ability) {
+	this.abilities.remove(ability);
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
