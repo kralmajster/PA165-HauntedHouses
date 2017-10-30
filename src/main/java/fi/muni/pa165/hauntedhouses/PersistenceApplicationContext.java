@@ -25,7 +25,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @ComponentScan(basePackageClasses = {PersonDao.class, AbilityDao.class, GhostDao.class, HouseDao.class})
-public class PersistenceSampleApplicationContext {
+public class PersistenceApplicationContext {
     @Bean
     public JpaTransactionManager transactionManager(){
         return  new JpaTransactionManager(entityManagerFactory().getObject());

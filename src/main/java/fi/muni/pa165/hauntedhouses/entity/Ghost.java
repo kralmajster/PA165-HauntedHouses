@@ -49,8 +49,8 @@ public class Ghost {
     private String hauntReason;
     
     @NotNull
-    @ManyToOne(mappedBy = "ghosts")
-    private long idHouse;
+    @ManyToOne
+    private House house;
     
     @ManyToMany
     private Set<Ability> abilities = new HashSet<>();
@@ -108,12 +108,12 @@ public class Ghost {
         this.hauntReason = hauntReason;
     }
     
-    public long getIdHouse() {
-        return idHouse;
+    public House getHouse() {
+        return house;
     }
     
-    public void setIdHouse(long idHouse) {
-        this.idHouse = idHouse;
+    public void setHouse(House house) {
+        this.house = house;
     }
     
     public Set<Ability> getAbilities() {

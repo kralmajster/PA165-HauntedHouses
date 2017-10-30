@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fi.muni.pa165.hauntedhouses.entity;
 
 import java.util.Collections;
@@ -21,7 +16,6 @@ import javax.validation.constraints.NotNull;
 import fi.muni.pa165.hauntedhouses.enums.AbilityType;
 
 /**
- *
  * @author Adam Dobiáš, 451044
  */
 @Entity
@@ -46,10 +40,6 @@ public class Ability {
 
     // constructor
     public Ability() {
-    }
-
-    public void addGhost(Ghost ghost) {
-        ghosts.add(ghost);
     }
     
     //getters, setters
@@ -91,6 +81,14 @@ public class Ability {
 
     public void setGhosts(Set<Ghost> ghosts) {
         this.ghosts = ghosts;
+    }
+    
+    public void addGhost(Ghost ghost) {
+        ghosts.add(ghost);
+    }
+    
+    public void removeGhost(Ghost ghost) {
+        this.ghosts.remove(ghost);
     }
 
     @Override

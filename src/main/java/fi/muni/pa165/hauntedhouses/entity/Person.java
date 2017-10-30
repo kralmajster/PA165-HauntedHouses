@@ -29,7 +29,7 @@ public class Person {
 
     private String passwordHash;
 
-    @ManyToOne(mappedBy="residents")
+    @ManyToOne
     private House house;
 
     // Constructor
