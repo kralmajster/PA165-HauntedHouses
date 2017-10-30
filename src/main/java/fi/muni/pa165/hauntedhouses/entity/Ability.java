@@ -22,7 +22,6 @@ import fi.muni.pa165.hauntedhouses.enums.AbilityType;
 public class Ability {
     
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
