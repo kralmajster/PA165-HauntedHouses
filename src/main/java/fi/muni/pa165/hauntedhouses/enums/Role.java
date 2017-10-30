@@ -6,5 +6,6 @@ package fi.muni.pa165.hauntedhouses.enums;
  */
 public enum Role {
     ADMIN,
-    OWNER
+    OWNER,
+    RESIDENT
 }
