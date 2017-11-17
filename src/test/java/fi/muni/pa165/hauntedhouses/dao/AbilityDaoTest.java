@@ -1,32 +1,21 @@
 package fi.muni.pa165.hauntedhouses.dao;
 
-import fi.muni.pa165.hauntedhouses.PersistenceApplicationContext;
-import fi.muni.pa165.hauntedhouses.entity.Ability;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import fi.muni.pa165.hauntedhouses.enums.AbilityType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import static org.assertj.core.api.Assertions.*;
+
+import fi.muni.pa165.hauntedhouses.entity.Ability;
+import fi.muni.pa165.hauntedhouses.enums.AbilityType;
 
 /**
  * @author Marek Bohm, 396257
  */
 
-@ContextConfiguration(classes = PersistenceApplicationContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
-public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
+public class AbilityDaoTest extends AbstractDaoTest {
 
-    @Autowired
-    public AbilityDao abilityDao;
     private Ability trapAbility;
 
     @BeforeMethod
@@ -48,6 +37,15 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
         abilityDao.remove(newAbility);
     }
 
+    @Test
+    public void testUpdate() {
+        trapAbility.setName("Trap ability 1000");
+        abilityDao.update(trapAbility);
+        List<Ability> abilities = abilityDao.findAll();
+
+        assertThat(abilities.size()).isEqualTo(1);
+        assertThat(abilities.get(0).getName()).isEqualTo(trapAbility.getName());
+    }
     @Test
     public void testRemove() {
         assertThat(abilityDao.findById(trapAbility.getId())).isNotNull();

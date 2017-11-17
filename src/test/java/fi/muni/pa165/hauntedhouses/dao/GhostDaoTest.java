@@ -1,38 +1,24 @@
 package fi.muni.pa165.hauntedhouses.dao;
 
-import fi.muni.pa165.hauntedhouses.PersistenceApplicationContext;
-import fi.muni.pa165.hauntedhouses.entity.Ghost;
-import fi.muni.pa165.hauntedhouses.entity.House;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Calendar;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import fi.muni.pa165.hauntedhouses.entity.Ghost;
+import fi.muni.pa165.hauntedhouses.entity.House;
 
 /**
  * @author Klara Kufova, 410091
  */
 
-@ContextConfiguration(classes = PersistenceApplicationContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
-public class GhostDaoTest extends AbstractTestNGSpringContextTests {
-
-    @Autowired
-    public GhostDao ghostDao;
+public class GhostDaoTest extends AbstractDaoTest {
 
     private Ghost zombie, witch, werewolf;
-    
+
     private House hovel, abandonedFactory, lair;
 
     @BeforeMethod
@@ -89,6 +75,18 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(ghostDao.findById(werewolf.getId())).isNotNull();
         
         ghostDao.remove(werewolf); // put into original state
+    }
+
+    @Test
+    public void testUpdate() {
+        zombie.setDescription("New zombie description");
+        ghostDao.update(zombie);
+        
+        List<Ghost> ghosts = ghostDao.findAll();
+        Ghost returnedGhost = ghostDao.findByName(zombie.getName());
+        
+        assertThat(ghosts.size()).isEqualTo(2);
+        assertThat(returnedGhost.getDescription()).isEqualTo(zombie.getDescription());
     }
 
     @Test

@@ -95,14 +95,15 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof Person)) return false;
         Person person = (Person) o;
-        return login.equals(person.login);
+        return getLogin() != null ? getLogin().equals(person.getLogin()) : person.getLogin() == null;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode() * login.hashCode();
+        final int prime = 31;
+        return prime + ((login == null) ? 0 : login.hashCode());
     }
 
     @Override

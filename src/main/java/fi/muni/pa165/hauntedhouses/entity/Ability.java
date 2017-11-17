@@ -107,10 +107,10 @@ public class Ability {
         }
 
         final Ability other = (Ability) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(getName(), other.getName())) {
             return false;
         }
-        if (this.type != other.type) {
+        if (getType() != other.getType()) {
             return false;
         }
         return true;

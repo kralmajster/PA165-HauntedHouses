@@ -27,6 +27,11 @@ public class GhostDaoImpl implements GhostDao{
     }
     
     @Override
+    public void update(Ghost ghost) {
+        em.merge(ghost);
+    }
+    
+    @Override
     public void remove(Ghost ghost) {
         em.remove(ghost);
     }

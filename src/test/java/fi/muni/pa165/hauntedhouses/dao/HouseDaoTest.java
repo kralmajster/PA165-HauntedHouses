@@ -7,16 +7,9 @@ import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import fi.muni.pa165.hauntedhouses.PersistenceApplicationContext;
 import fi.muni.pa165.hauntedhouses.entity.House;
 
 /**
@@ -25,20 +18,14 @@ import fi.muni.pa165.hauntedhouses.entity.House;
  *
  */
 
-@ContextConfiguration(classes = PersistenceApplicationContext.class)
-@TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
-public class HouseDaoTest extends AbstractTestNGSpringContextTests {
-
-    @Autowired
-    private HouseDao houseDao;
+public class HouseDaoTest extends AbstractDaoTest {
 
     private House testHouse1;
     private House testHouse2;
 
     @BeforeMethod
     public void initTests() {
-    	testHouse1 = new House();
+        testHouse1 = new House();
         testHouse1.setName("The Best House Ever");
         testHouse1.setAddress("Lost 3");
         testHouse1.setBecameHauntedDate(new Date(5));

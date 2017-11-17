@@ -18,6 +18,12 @@ public interface GhostDao {
     public void create(Ghost ghost);
     
     /**
+     * Update a specific ghost
+     * @param ghost is the ghost to be updated
+     */
+    public void update(Ghost ghost);
+    
+    /**
      * Removes the existing ghost
      * @param ghost is the ghost to be removed
      */
