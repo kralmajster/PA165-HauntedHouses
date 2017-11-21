@@ -1,48 +1,56 @@
 package fi.muni.pa165.hauntedhouses.dao;
 
 import fi.muni.pa165.hauntedhouses.entity.Person;
+
 import java.util.List;
 
 /**
  * @author Marek Bohm, 396257
  */
-    public interface PersonDao {
-        /**
-         * Create persistent representation of person in database.
-         * @param p Person to persist
-         */
-        public void create(Person p);
 
-        /**
-         * Update person in database.
-         * @param p person to update.
-         */
-        public void update(Person p);
+public interface PersonDao {
 
-        /**
-         * Delete person from database.
-         * @param p person to delete.
-         */
-        public void remove(Person p);
+    /**
+     * Creates a persistent representation of a person in the database.
+     *
+     * @param person the person to be persisted
+     */
+    public void create(Person person);
 
-        /**
-         * Find person in database by given id.
-         * @param id person id to be found.
-         * @return Person with given id.
-         */
-        public Person findById(Long id);
+    /**
+     * Updates a person in the database.
+     *
+     * @param person the person to be updated
+     */
+    public void update(Person person);
 
-        /**
-         * Find person by given login.
-         * @param login person's login to be found.
-         * @return Person with given login.
-         */
-        public Person findPersonByLogin(String login);
+    /**
+     * Deletes a person from the database.
+     *
+     * @param person the person to be deleted
+     */
+    public void remove(Person person);
 
-        /**
-         * Method for retrieving all persons form database.
-         * @return All persons from database.
-         */
-        public List<Person> findAll();
+    /**
+     * Finds a person in the database by the given ID.
+     *
+     * @param id the ID of the person to be found
+     * @return the person with the given ID
+     */
+    public Person findById(Long id);
+
+    /**
+     * Finds a person in the database by the given login.
+     *
+     * @param login the login of the person to be found
+     * @return the person with the given login
+     */
+    public Person findPersonByLogin(String login);
+
+    /**
+     * Retrieves a list of all people from the database.
+     *
+     * @return a list of all people from the database
+     */
+    public List<Person> findAll();
 }
-

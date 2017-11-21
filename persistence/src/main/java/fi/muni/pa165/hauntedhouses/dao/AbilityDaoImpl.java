@@ -1,21 +1,25 @@
 package fi.muni.pa165.hauntedhouses.dao;
 
 import fi.muni.pa165.hauntedhouses.entity.Ability;
+
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 
 /**
  * @author Adam Dobiáš, 451044
  */
+
 @Repository
 public class AbilityDaoImpl implements AbilityDao {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @Override
     public void create(Ability ability) {
         em.persist(ability);
@@ -51,5 +55,5 @@ public class AbilityDaoImpl implements AbilityDao {
     public List<Ability> findAll() {
         return em.createQuery("SELECT a FROM Ability a", Ability.class).getResultList();
     }
-    
+
 }

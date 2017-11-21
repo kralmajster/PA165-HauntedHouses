@@ -8,11 +8,13 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import fi.muni.pa165.hauntedhouses.PersistenceApplicationContext;
+
 /**
- * 
+ *
  * @author Mario Majernik, 422165
  *
  */
+
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
@@ -20,13 +22,14 @@ public class AbstractDaoTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     protected GhostDao ghostDao;
-    
+
     @Autowired
     protected AbilityDao abilityDao;
-    
+
     @Autowired
     protected HouseDao houseDao;
-    
+
     @Autowired
     protected PersonDao personDao;
+    
 }

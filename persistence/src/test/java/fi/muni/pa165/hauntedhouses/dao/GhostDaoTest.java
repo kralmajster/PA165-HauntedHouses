@@ -28,7 +28,7 @@ public class GhostDaoTest extends AbstractDaoTest {
         hovel = new House();
         hovel.setName("The Hovel");
         hovel.setAddress("Bloodcurdling 666");
-        
+
         abandonedFactory = new House();
         abandonedFactory.setName("The Abandoned Factory");
         abandonedFactory.setAddress("Nightmarish 13");
@@ -73,18 +73,18 @@ public class GhostDaoTest extends AbstractDaoTest {
         assertThat(ghostDao.findById(werewolf.getId())).isNull();
         ghostDao.create(werewolf);
         assertThat(ghostDao.findById(werewolf.getId())).isNotNull();
-        
-        ghostDao.remove(werewolf); // put into original state
+
+        ghostDao.remove(werewolf); // put into the original state
     }
 
     @Test
     public void testUpdate() {
-        zombie.setDescription("New zombie description");
+        zombie.setDescription("Zombies are most commonly found in horror and fantasy genre works.");
         ghostDao.update(zombie);
-        
+
         List<Ghost> ghosts = ghostDao.findAll();
         Ghost returnedGhost = ghostDao.findByName(zombie.getName());
-        
+
         assertThat(ghosts.size()).isEqualTo(2);
         assertThat(returnedGhost.getDescription()).isEqualTo(zombie.getDescription());
     }
@@ -100,7 +100,7 @@ public class GhostDaoTest extends AbstractDaoTest {
     @Test
     public void testFindByID() {
         Ghost foundGhost = ghostDao.findById(witch.getId());
-        
+
         assertThat(foundGhost.getName()).isEqualTo("Priscilla");
         assertThat(foundGhost.getDescription()).isEqualTo("A woman practicing black witchcraft with the aid of a devil.");
     }
@@ -114,7 +114,7 @@ public class GhostDaoTest extends AbstractDaoTest {
     @Test
     public void testFindAll() {
         List<Ghost> ghosts = ghostDao.findAll();
-        
+
         assertThat(ghosts).hasSize(2).contains(zombie, witch).doesNotContain(werewolf);
     }
 

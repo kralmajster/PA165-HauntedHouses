@@ -46,6 +46,7 @@ public class AbilityDaoTest extends AbstractDaoTest {
         assertThat(abilities.size()).isEqualTo(1);
         assertThat(abilities.get(0).getName()).isEqualTo(trapAbility.getName());
     }
+
     @Test
     public void testRemove() {
         assertThat(abilityDao.findById(trapAbility.getId())).isNotNull();

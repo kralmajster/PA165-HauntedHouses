@@ -18,37 +18,36 @@ import fi.muni.pa165.hauntedhouses.enums.AbilityType;
 /**
  * @author Adam Dobiáš, 451044
  */
+
 @Entity
 public class Ability {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotNull
     @Column(nullable = false, unique = true)
     private String name;
-    
+
     private String description;
-    
+
     @NotNull
-    private AbilityType type; 
-    
+    private AbilityType type;
+
     @ManyToMany(mappedBy = "abilities")
     private Set<Ghost> ghosts = new HashSet<>();
 
-    // constructor
+    // Constructors:
+    
     public Ability() {
     }
+
+    // Getters and setters:
     
-    //getters, setters
     public Long getId() {
         return id;
     }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public String getName() {
         return name;
@@ -81,11 +80,11 @@ public class Ability {
     public void setGhosts(Set<Ghost> ghosts) {
         this.ghosts = ghosts;
     }
-    
+
     public void addGhost(Ghost ghost) {
         ghosts.add(ghost);
     }
-    
+
     public void removeGhost(Ghost ghost) {
         this.ghosts.remove(ghost);
     }
@@ -94,7 +93,7 @@ public class Ability {
     public int hashCode() {
         final int prime = 31;
         return prime + ((type == null) ? 0 : type.hashCode())
-                     + ((name == null) ? 0 : name.hashCode());
+                + ((name == null) ? 0 : name.hashCode());
     }
 
     @Override

@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import fi.muni.pa165.hauntedhouses.entity.House;
 
 /**
- * 
+ *
  * @author Mario Majernik, 422165
  *
  */
@@ -43,7 +43,7 @@ public class HouseDaoTest extends AbstractDaoTest {
         houseDao.create(testHouse2);
     }
 
-    @Test(dependsOnMethods = { "getHouseByNameTest" })
+    @Test(dependsOnMethods = {"getHouseByNameTest"})
     public void createHouseTest() {
         House house = new House();
         house.setName("First House");
@@ -68,7 +68,7 @@ public class HouseDaoTest extends AbstractDaoTest {
         houseDao.create(house);
     }
 
-    @Test(expectedExceptions = ConstraintViolationException.class , dependsOnMethods = { "getAllHousesTest" })
+    @Test(expectedExceptions = ConstraintViolationException.class, dependsOnMethods = {"getAllHousesTest"})
     public void createHouseWithNullAdressTest() {
         House house = new House();
         house.setName("First House");
@@ -79,7 +79,7 @@ public class HouseDaoTest extends AbstractDaoTest {
         houseDao.findAll();
     }
 
-    @Test(dependsOnMethods = { "getAllHousesTest" })
+    @Test(dependsOnMethods = {"getAllHousesTest"})
     public void removeHouseTest() {
         List<House> houses = houseDao.findAll();
 
@@ -109,7 +109,7 @@ public class HouseDaoTest extends AbstractDaoTest {
         assertThat(houses.size()).isEqualTo(2);
     }
 
-    @Test(dependsOnMethods = { "getAllHousesTest" })
+    @Test(dependsOnMethods = {"getAllHousesTest"})
     public void updateHouseTest() {
         testHouse1.setName("new name");
         houseDao.create(testHouse1);

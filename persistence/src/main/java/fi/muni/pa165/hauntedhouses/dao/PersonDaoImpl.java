@@ -6,13 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.List;
-import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Marek Bohm, 396257
  */
+
 @Repository
 public class PersonDaoImpl implements PersonDao {
 
@@ -36,8 +38,9 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public Person findPersonByLogin(String login) {
-        if (login == null || login.isEmpty())
-            throw new IllegalArgumentException("Cannot search for null login");
+        if (login == null || login.isEmpty()) {
+            throw new IllegalArgumentException("The login is null!");
+        }
 
         try {
             return em

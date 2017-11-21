@@ -1,49 +1,57 @@
 package fi.muni.pa165.hauntedhouses.dao;
 
 import fi.muni.pa165.hauntedhouses.entity.Ability;
+
 import java.util.List;
 
 /**
  * @author Adam Dobiáš, 451044
  */
+
 public interface AbilityDao {
-    
+
     /**
-     * creates new Ability entry in database
-     * @param ability 
+     * Creates a new ability entry in the database.
+     *
+     * @param ability
      */
     public void create(Ability ability);
-    
+
     /**
-     * updates given item
-     * @param ability 
+     * Updates the given ability.
+     *
+     * @param ability
      */
     public void update(Ability ability);
-    
+
     /**
-     * removes given ability from DB
-     * @param ability 
+     * Removes the given ability from the database.
+     *
+     * @param ability
      */
     public void remove(Ability ability);
-    
+
     /**
-     * finds item
+     * Finds an ability.
+     *
      * @param Id
-     * @return ability specified by id, null otherwise
+     * @return an ability specified by its ID, null otherwise
      */
     public Ability findById(Long Id);
-    
+
     /**
-     * finds item
+     * Finds an ability.
+     *
      * @param abilityName
-     * @return ability specified by (unique) name, null otherwise
+     * @return an ability specified by its (unique) name, null otherwise
      */
     public Ability findByName(String abilityName);
-    
+
     /**
-     * finds all abilities currently stored in DB
-     * @return list of currently stored abilities
+     * Finds all abilities currently stored in the database.
+     *
+     * @return a list of the currently stored abilities
      */
     public List<Ability> findAll();
-    
+
 }

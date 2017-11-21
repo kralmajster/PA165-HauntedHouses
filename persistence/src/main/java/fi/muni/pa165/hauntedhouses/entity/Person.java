@@ -2,12 +2,21 @@ package fi.muni.pa165.hauntedhouses.entity;
 
 import fi.muni.pa165.hauntedhouses.enums.Role;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import javax.validation.constraints.NotNull;
 
 /**
  * @author Marek Bohm 396257
  */
+
 @Entity
 public class Person {
 
@@ -32,18 +41,17 @@ public class Person {
     @ManyToOne
     private House house;
 
-    // Constructor
+    // Constructors:
+    
     public Person() {
     }
 
+    // Getters and setters:
+    
     public Long getId() {
         return id;
     }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-
+    
     public String getName() {
         return name;
     }
@@ -94,8 +102,12 @@ public class Person {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof Person)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof Person)) {
+            return false;
+        }
         Person person = (Person) o;
         return getLogin() != null ? getLogin().equals(person.getLogin()) : person.getLogin() == null;
     }
@@ -108,12 +120,12 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", type=" + type +
-                ", login='" + login + '\'' +
-                '}';
+        return "Person{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", surname='" + surname + '\''
+                + ", type=" + type
+                + ", login='" + login + '\''
+                + '}';
     }
 }

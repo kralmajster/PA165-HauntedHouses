@@ -24,22 +24,22 @@ public class HouseDaoImpl implements HouseDao {
     public void create(House house) {
         manager.persist(house);
     }
-    
+
     @Override
     public void remove(House house) {
         manager.remove(house);
     }
-    
+
     @Override
     public void update(House house) {
         manager.merge(house);
     }
-    
+
     @Override
     public House findByID(Long id) {
         return manager.find(House.class, id);
     }
-    
+
     @Override
     public House findByName(String name) {
         try {
@@ -50,7 +50,7 @@ public class HouseDaoImpl implements HouseDao {
             return null;
         }
     }
-    
+
     @Override
     public List<House> findAll() {
         return manager.createQuery("SELECT h FROM House h", House.class).getResultList();

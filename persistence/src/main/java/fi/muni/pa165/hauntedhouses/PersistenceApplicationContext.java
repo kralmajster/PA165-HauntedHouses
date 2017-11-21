@@ -45,9 +45,11 @@ public class PersistenceApplicationContext {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        
         jpaFactoryBean.setDataSource(db());
         jpaFactoryBean.setLoadTimeWeaver(instrumentationLoadTimeWeaver());
         jpaFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        
         return jpaFactoryBean;
     }
 
@@ -65,7 +67,8 @@ public class PersistenceApplicationContext {
     public DataSource db() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase database = builder.setType(EmbeddedDatabaseType.DERBY).build();
+        
         return database;
     }
-    
+
 }
