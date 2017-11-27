@@ -15,7 +15,7 @@ public interface GhostFacade {
      * @param g ghost to be created
      * @return id of new ghost
      */
-    Long createGhost(GhostDTO g);
+    GhostDTO createGhost(GhostDTO g);
 
     /**
      * Update given ghost
@@ -54,7 +54,7 @@ public interface GhostFacade {
      * @param ability of ghosts to be found
      * @return List<GhostDTO> - ghosts possessing given ability
      */
-    List<GhostDTO> findByAbility(String ability);
+    List<GhostDTO> findByAbility(AbilityDTO a);
 
     /**
      * Grants ability to given ghost

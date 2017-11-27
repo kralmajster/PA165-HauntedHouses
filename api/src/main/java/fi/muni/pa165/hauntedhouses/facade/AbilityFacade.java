@@ -14,7 +14,7 @@ public interface AbilityFacade {
      * @param a ability to be created
      * @return id of new ability
      */
-    Long createAbility(AbilityDTO a);
+    AbilityDTO createAbility(AbilityDTO a);
 
     /**
      * Update given ability

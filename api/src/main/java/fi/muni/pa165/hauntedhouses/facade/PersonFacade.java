@@ -54,7 +54,7 @@ public interface PersonFacade {
      * @param u - PersonDTO
      * @return true if person is allowed for action, else false
      */
-    boolean isAllowed(PersonDTO u, List<Role> acessConstraint);
+    boolean isAllowed(PersonDTO p, List<Role> accessConstraint);
 
     /**
      * Find person by id
@@ -70,7 +70,7 @@ public interface PersonFacade {
      * @param name - user's login
      * @return found person or null
      */
-    PersonDTO findPersonByName(String name);
+    List<PersonDTO> findPersonByName(String name);
 
     /**
      * Person's current house will be changed

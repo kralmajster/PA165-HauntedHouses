@@ -1,10 +1,10 @@
 package fi.muni.pa165.hauntedhouses.facade;
 
-import java.util.List;
-
 import fi.muni.pa165.hauntedhouses.dto.GhostDTO;
 import fi.muni.pa165.hauntedhouses.dto.HouseDTO;
 import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
+
+import java.util.List;
 
 
 /**
@@ -17,7 +17,7 @@ public interface HouseFacade {
      * @param h house to be created
      * @return id of new house
      */
-    Long createHouse(HouseDTO h);
+    HouseDTO createHouse(HouseDTO h);
 
     /**
      * Update given house
