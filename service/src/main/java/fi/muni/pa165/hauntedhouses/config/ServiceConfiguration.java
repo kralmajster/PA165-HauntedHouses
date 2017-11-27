@@ -1,4 +1,4 @@
-package config;
+package fi.muni.pa165.hauntedhouses.config;
 
 import fi.muni.pa165.hauntedhouses.PersistenceApplicationContext;
 import fi.muni.pa165.hauntedhouses.service.PersonServiceImpl;
