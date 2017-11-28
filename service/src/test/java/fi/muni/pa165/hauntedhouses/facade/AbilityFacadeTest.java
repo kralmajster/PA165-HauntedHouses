@@ -21,6 +21,7 @@ import fi.muni.pa165.hauntedhouses.dto.AbilityDTO;
 import fi.muni.pa165.hauntedhouses.entity.Ability;
 import fi.muni.pa165.hauntedhouses.enums.AbilityType;
 import fi.muni.pa165.hauntedhouses.service.AbilityService;
+import static org.mockito.Mockito.times;
 /**
  * 
  * @author Mario Majernik, 422165
@@ -78,7 +79,7 @@ public class AbilityFacadeTest extends AbstractFacadeTest{
         
         abilityFacade.updateAbility(abilityDTO);
         verify(abilityService).updateAbility(ability);
-        verify(beanMappingService).mapTo(abilityDTO, Ability.class);
+        verify(beanMappingService, times(2)).mapTo(abilityDTO, Ability.class);
     }
     
     @Test
@@ -122,7 +123,7 @@ public class AbilityFacadeTest extends AbstractFacadeTest{
 
         AbilityDTO abilityDTO = abilityFacade.findById(abilityId);
 
-        assertThat(abilityDTO).isNotNull();
+        assertThat(ability).isNotNull();
         assertThat(ability.getName()).isEqualTo(abilityDTO.getName());
         
         verify(abilityService).findById(abilityId);
@@ -146,7 +147,7 @@ public class AbilityFacadeTest extends AbstractFacadeTest{
 
         AbilityDTO abilityDTO = abilityFacade.findByName(abilityName);
 
-        assertThat(abilityDTO).isNotNull();
+        assertThat(ability).isNotNull();
         assertThat(ability.getName()).isEqualTo(abilityDTO.getName());
         verify(abilityService).findByName(abilityName);
         verify(beanMappingService).mapTo(ability, AbilityDTO.class);

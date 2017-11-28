@@ -139,10 +139,10 @@ public class GhostServiceTest extends AbstractServiceTest{
     }
     
     @Test
-    public void findByAbilityReturnsNullTest() {
+    public void findByAbilityReturnsEmptyListTest() {
     	when(ghostDao.findAll()).thenReturn(emptyList); 
     	List<Ghost> ghosts = ghostService.findAll();
-    	assertThat(emptyList.get(0).getAbilities()).isEqualTo(ghosts.get(0).getAbilities());
+    	assertThat(ghosts).isEmpty();
     	
     }
     

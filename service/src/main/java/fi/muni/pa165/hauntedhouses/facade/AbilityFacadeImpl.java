@@ -9,7 +9,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class AbilityFacadeImpl implements AbilityFacade {
 
     private static final Logger log = LoggerFactory.getLogger(AbilityFacadeImpl.class);
@@ -21,19 +25,15 @@ public class AbilityFacadeImpl implements AbilityFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public AbilityDTO createAbility(AbilityDTO abilityDTO) {
+    public void createAbility(AbilityDTO abilityDTO) {
         log.debug("Creating abilityDto {}", abilityDTO);
-        Ability ability = beanMappingService.mapTo(abilityDTO, Ability.class);
-        abilityService.createAbility(ability);
-        abilityDTO.setId(ability.getId());
-        return abilityDTO;
+        abilityService.createAbility(beanMappingService.mapTo(abilityDTO, Ability.class));
     }
 
     @Override
     public void updateAbility(AbilityDTO abilityDTO) {
         log.debug("Updating abilityDto {}", abilityDTO);
-        Ability ability = beanMappingService.mapTo(abilityDTO, Ability.class);
-        abilityService.updateAbility(ability);
+        abilityService.updateAbility(beanMappingService.mapTo(abilityDTO, Ability.class));
     }
 
     @Override
@@ -46,18 +46,23 @@ public class AbilityFacadeImpl implements AbilityFacade {
     @Override
     public AbilityDTO findById(Long id) {
         log.debug("Finding ability by id: {}", id);
-        return  beanMappingService.mapTo(abilityService.findById(id), AbilityDTO.class);
+        
+        Ability ability = abilityService.findById(id);
+        return ability == null ? null : beanMappingService.mapTo(ability, AbilityDTO.class);
     }
 
     @Override
     public AbilityDTO findByName(String name) {
         log.debug("Finding ability by name: {}", name);
-        return  beanMappingService.mapTo(abilityService.findByName(name), AbilityDTO.class);
+        Ability ability = abilityService.findByName(name);
+        return beanMappingService.mapTo(ability, AbilityDTO.class);
     }
 
     @Override
     public List<AbilityDTO> findAllAbilities() {
-        log.debug("Getting all people");
-        return  beanMappingService.mapTo(abilityService.findAllAbilities(), AbilityDTO.class);
+        log.debug("Getting all abilities");
+        
+        List<Ability> abilities = abilityService.findAllAbilities();
+        return abilities == null ? null : beanMappingService.mapTo(abilities, AbilityDTO.class);
     }
 }

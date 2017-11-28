@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
 import fi.muni.pa165.hauntedhouses.entity.Person;
 import fi.muni.pa165.hauntedhouses.service.PersonService;
+import static org.mockito.Mockito.times;
 /**
  * 
  * @author Mario Majernik, 422165
@@ -54,9 +55,11 @@ public class PersonFacadeTest extends AbstractFacadeTest{
 
         person = new Person();
         person.setName(personName);
+        person.setPasswordHash("pass");
 
         personDTO = new PersonDTO();
         personDTO.setName(personName);
+        personDTO.setPassword("pass");
     }
 
     @Test
@@ -80,7 +83,7 @@ public class PersonFacadeTest extends AbstractFacadeTest{
 
         personFacade.updatePerson(personDTO);
         verify(personService).updatePerson(person);
-        verify(beanMappingService).mapTo(personDTO, Person.class);
+        verify(beanMappingService, times(2)).mapTo(personDTO, Person.class);
     }
 
     @Test
@@ -160,7 +163,7 @@ public class PersonFacadeTest extends AbstractFacadeTest{
 
         List<PersonDTO> personDTO = personFacade.findPersonByName(personName);
 
-        assertThat(personDTO).isNull();
+        assertThat(personDTO).isEmpty();
         verify(personService).findPersonByName(personName);
         verify(beanMappingService, never()).mapTo(any(), any());
     }

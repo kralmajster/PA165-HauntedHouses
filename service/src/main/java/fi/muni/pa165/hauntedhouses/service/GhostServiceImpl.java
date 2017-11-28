@@ -42,7 +42,7 @@ public class GhostServiceImpl implements GhostService{
         if (name == null || name.isEmpty()){
             throw new IllegalArgumentException("cannot search by empty or null name");
         }
-        return findByName(name);
+        return ghostDao.findByName(name);
     }
 
     @Override

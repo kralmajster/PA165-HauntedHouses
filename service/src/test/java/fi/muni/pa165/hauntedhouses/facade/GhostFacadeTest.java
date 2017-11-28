@@ -22,6 +22,7 @@ import fi.muni.pa165.hauntedhouses.dto.GhostDTO;
 import fi.muni.pa165.hauntedhouses.entity.Ability;
 import fi.muni.pa165.hauntedhouses.entity.Ghost;
 import fi.muni.pa165.hauntedhouses.service.GhostService;
+import static org.mockito.Mockito.times;
 /**
  * 
  * @author Mario Majernik, 422165
@@ -84,7 +85,7 @@ public class GhostFacadeTest extends AbstractFacadeTest{
         
         ghostFacade.updateGhost(ghostDTO);
         verify(ghostService).updateGhost(ghost);
-        verify(beanMappingService).mapTo(ghostDTO, Ghost.class);
+        verify(beanMappingService, times(2)).mapTo(ghostDTO, Ghost.class);
     }
     
     @Test

@@ -11,7 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class HouseFacadeImpl implements HouseFacade {
 
     private static final Logger log = LoggerFactory.getLogger(HouseFacadeImpl.class);
@@ -66,7 +70,8 @@ public class HouseFacadeImpl implements HouseFacade {
     @Override
     public List<HouseDTO> findAllHouses() {
         log.debug("Getting all people");
-        return  beanMappingService.mapTo(houseService.findAllHouses(), HouseDTO.class);
+        List<House> houses = houseService.findAllHouses();
+        return houses == null ? null : beanMappingService.mapTo(houses, HouseDTO.class);
     }
 
     @Override

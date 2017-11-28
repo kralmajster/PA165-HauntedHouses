@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 import fi.muni.pa165.hauntedhouses.dto.HouseDTO;
 import fi.muni.pa165.hauntedhouses.entity.House;
 import fi.muni.pa165.hauntedhouses.service.HouseService;
+import static org.mockito.Mockito.times;
 /**
  * 
  * @author Mario Majernik, 422165
@@ -77,7 +78,7 @@ public class HouseFacadeTest extends AbstractFacadeTest{
         
         houseFacade.updateHouse(houseDTO);
         verify(houseService).updateHouse(house);
-        verify(beanMappingService).mapTo(houseDTO, House.class);
+        verify(beanMappingService, times(2)).mapTo(houseDTO, House.class);
     }
     
     @Test

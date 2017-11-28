@@ -13,7 +13,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.List;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class GhostFacadeImpl implements GhostFacade {
 
     private static final Logger log = LoggerFactory.getLogger(GhostFacadeImpl.class);
@@ -61,7 +65,8 @@ public class GhostFacadeImpl implements GhostFacade {
     @Override
     public List<GhostDTO> findAllGhosts() {
         log.debug("Getting all people");
-        return  beanMappingService.mapTo(ghostService.findAll(), GhostDTO.class);
+        List<Ghost> ghosts = ghostService.findAll();
+        return ghosts == null ? null : beanMappingService.mapTo(ghosts, GhostDTO.class);
     }
 
     @Override

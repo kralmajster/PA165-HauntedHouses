@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * @author Marek Bohm 396257
  */
+
 @Service
 @Transactional
 public class PersonFacadeImpl implements PersonFacade {
@@ -58,7 +59,8 @@ public class PersonFacadeImpl implements PersonFacade {
     @Override
     public Collection<PersonDTO> getAllPeople() {
         log.debug("Getting all people");
-        return  beanMappingService.mapTo(personService.getAllPeople(), PersonDTO.class);
+        List<Person> people = personService.getAllPeople();
+        return people == null ? null : beanMappingService.mapTo(people, PersonDTO.class);
     }
 
     @Override
