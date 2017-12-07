@@ -7,80 +7,94 @@ import fi.muni.pa165.hauntedhouses.dto.HouseDTO;
 import java.util.List;
 
 /**
- * Created by Marek Bohm 396257
+ * Created by Marek Bohm, 396257.
  */
+
 public interface GhostFacade {
-    /**
-     * Create new ghost
-     * @param g ghost to be created
-     * @return id of new ghost
-     */
-    GhostDTO createGhost(GhostDTO g);
 
     /**
-     * Update given ghost
-     * @param g ghost to be updated
+     * Creates a new ghost.
+     *
+     * @param ghost the ghost to be created
+     * @return the newly created ghost
      */
-    void updateGhost(GhostDTO g);
+    GhostDTO createGhost(GhostDTO ghost);
 
     /**
-     * Delete ghost with given id
-     * @param id of ghost to be deleted
+     * Updates the given ghost.
+     *
+     * @param ghost the ghost to be updated
+     */
+    void updateGhost(GhostDTO ghost);
+
+    /**
+     * Deletes the ghost with the given ID.
+     *
+     * @param id of the ghost to be deleted
      */
     void deleteGhost(Long id);
 
     /**
-     * Find ghost with given id
-     * @param id of ghost to be found
-     * @return ghost with given id
+     * Finds the ghost with the given ID.
+     *
+     * @param id of the ghost to be found
+     * @return the ghost with the given ID
      */
     GhostDTO findById(Long id);
 
     /**
-     * Find ghost with given name
-     * @param name of ghost to be found
-     * @return ghost with given name
+     * Finds the ghost with the given name.
+     *
+     * @param name of the ghost to be found
+     * @return the ghost with the given name
      */
     GhostDTO findByName(String name);
 
     /**
-     * Find all ghosts.
-     * @return List of all ghosts.
+     * Finds all ghosts.
+     *
+     * @return list of all ghosts
      */
     List<GhostDTO> findAllGhosts();
 
     /**
-     * Find ghosts with given ability
-     * @param ability of ghosts to be found
-     * @return List<GhostDTO> - ghosts possessing given ability
+     * Finds all ghosts with the given ability.
+     *
+     * @param ability by which we want to find the ghosts
+     * @return the list of ghosts with the given ability
      */
-    List<GhostDTO> findByAbility(AbilityDTO a);
+    List<GhostDTO> findByAbility(AbilityDTO ability);
 
     /**
-     * Grants ability to given ghost
-     * @param g to which ability will be given
-     * @param a which will be granted
+     * Gives a particular ability to a ghost.
+     *
+     * @param ghost to which the ability will be given
+     * @param ability the ability to be given
      */
-    void giveAbility(GhostDTO g, AbilityDTO a);
+    void giveAbility(GhostDTO ghost, AbilityDTO ability);
 
     /**
-     * Revokes ability from given ghost
-     * @param g from which ability will be removed
-     * @param a which will be revoked
+     * Removes a single ability from a particular ghost.
+     *
+     * @param ghost which will lose an ability
+     * @param ability to be removed
      */
-    void removeAbility(GhostDTO g, AbilityDTO a);
+    void removeAbility(GhostDTO ghost, AbilityDTO ability);
 
     /**
-     * Ghost's house will be changed
-     * @param h house where ghost should haunt
-     * @param g ghost which should be haunting
+     * Changes the house where a particular ghost lives.
+     *
+     * @param house the new house where the ghost moves
+     * @param ghost to be moved
      */
-    void hauntHouse(HouseDTO h, GhostDTO g);
+    void hauntHouse(HouseDTO house, GhostDTO ghost);
 
     /**
-     * @param g ghost of concern
-     * @return true if is currently haunting, false otherwise
+     * Determines whether a particular ghost is currently haunting.
+     * 
+     * @param ghost to be used
+     * @return true if the ghost is currently haunting, false otherwise
      */
-    boolean isGhostHaunting(GhostDTO g);
-    
+    boolean isGhostHaunting(GhostDTO ghost);
+
 }

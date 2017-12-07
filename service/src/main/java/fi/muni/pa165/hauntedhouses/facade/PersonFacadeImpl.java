@@ -7,17 +7,20 @@ import fi.muni.pa165.hauntedhouses.entity.Person;
 import fi.muni.pa165.hauntedhouses.enums.Role;
 import fi.muni.pa165.hauntedhouses.service.BeanMappingService;
 import fi.muni.pa165.hauntedhouses.service.PersonService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+
 import java.util.Collection;
 import java.util.List;
 
 /**
- * @author Marek Bohm 396257
+ * @author Marek Bohm, 396257
  */
 
 @Service
@@ -32,10 +35,9 @@ public class PersonFacadeImpl implements PersonFacade {
     @Inject
     private BeanMappingService beanMappingService;
 
-
     @Override
     public PersonDTO registerPerson(PersonDTO personDTO) {
-        log.debug("Registering personDto {}", personDTO);
+        log.debug("Creating the person {}", personDTO);
         Person person = beanMappingService.mapTo(personDTO, Person.class);
         personService.registerPerson(person, personDTO.getPassword());
         personDTO.setId(person.getId());
@@ -44,47 +46,47 @@ public class PersonFacadeImpl implements PersonFacade {
 
     @Override
     public void removePerson(Long id) {
-        log.debug("Removing person with id {}", id);
+        log.debug("Removing the person with the ID {}", id);
         Person person = beanMappingService.mapTo(findPersonById(id), Person.class);
         personService.removePerson(person);
     }
 
     @Override
     public void updatePerson(PersonDTO personDTO) {
-        log.debug("Updating personDto {}", personDTO);
+        log.debug("Updating the person {}", personDTO);
         Person person = beanMappingService.mapTo(personDTO, Person.class);
         personService.updatePerson(person);
     }
 
     @Override
     public Collection<PersonDTO> getAllPeople() {
-        log.debug("Getting all people");
+        log.debug("Fetching all people");
         List<Person> people = personService.getAllPeople();
         return people == null ? null : beanMappingService.mapTo(people, PersonDTO.class);
     }
 
     @Override
     public boolean isAllowed(PersonDTO personDTO, List<Role> accessConstraint) {
-        log.debug("Checking if personDto {} is allowed", personDTO);
+        log.debug("Checking whether the person {} has the required rights", personDTO);
         Person person = beanMappingService.mapTo(personDTO, Person.class);
-        return  personService.isAllowed(person, accessConstraint);
+        return personService.isAllowed(person, accessConstraint);
     }
 
     @Override
     public PersonDTO findPersonById(Long id) {
-        log.debug("Finding person by id: {}", id);
-        return  beanMappingService.mapTo(personService.findPersonById(id), PersonDTO.class);
+        log.debug("Finding a person by the ID {}", id);
+        return beanMappingService.mapTo(personService.findPersonById(id), PersonDTO.class);
     }
 
     @Override
     public List<PersonDTO> findPersonByName(String name) {
-        log.debug("Finding person by name: {}", name);
-        return  beanMappingService.mapTo(personService.findPersonByName(name), PersonDTO.class);
+        log.debug("Finding a person by the name {}", name);
+        return beanMappingService.mapTo(personService.findPersonByName(name), PersonDTO.class);
     }
 
     @Override
     public void inhabitHouse(HouseDTO houseDTO, PersonDTO personDTO) {
-        log.debug("Setting person {} as inhabitant in {}", personDTO, houseDTO);
+        log.debug("Moving the person {} to the house {}", personDTO, houseDTO);
         personService.inhabitHouse(
                 beanMappingService.mapTo(houseDTO, House.class),
                 beanMappingService.mapTo(personDTO, Person.class)
@@ -93,6 +95,7 @@ public class PersonFacadeImpl implements PersonFacade {
 
     @Override
     public boolean authenticate(PersonDTO personDTO, String password) {
+        log.debug("Authenticating the person {} with the password {}", personDTO, password);
         Person person = beanMappingService.mapTo(personDTO, Person.class);
         return personService.authenticate(person, password);
     }

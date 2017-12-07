@@ -5,25 +5,28 @@ import fi.muni.pa165.hauntedhouses.dao.PersonDao;
 import fi.muni.pa165.hauntedhouses.entity.Ghost;
 import fi.muni.pa165.hauntedhouses.entity.House;
 import fi.muni.pa165.hauntedhouses.entity.Person;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author Adam Dobias
  */
+
 @Service
-public class HouseServiceImpl implements HouseService{
+public class HouseServiceImpl implements HouseService {
 
     @Inject
     private HouseDao houseDao;
-    
+
     @Inject
     private PersonDao personDao;
-    
+
     @Override
     public List<House> findAllHouses() throws DataAccessException {
         return houseDao.findAll();
@@ -32,7 +35,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public House findByName(String name) throws DataAccessException, IllegalArgumentException {
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("name cannot be null or empty");
+            throw new IllegalArgumentException("The name cannot be null or an empty string!");
         }
         return houseDao.findByName(name);
     }
@@ -40,7 +43,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public House findByAdress(String adress) throws DataAccessException, IllegalArgumentException {
         if (adress == null || adress.isEmpty()) {
-            throw new IllegalArgumentException("adress cannot be null or empty");
+            throw new IllegalArgumentException("The adress cannot be null or an empty string!");
         }
         for (House h : houseDao.findAll()) {
             if (h.getAddress().equals(adress)) {
@@ -53,7 +56,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public House findById(Long id) throws DataAccessException, IllegalArgumentException {
         if (id == null) {
-            throw new IllegalArgumentException("cannot search by null id");
+            throw new IllegalArgumentException("The ID cannot be null!");
         }
         return houseDao.findByID(id);
     }
@@ -61,7 +64,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public void updateHouse(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("cannot update null house");
+            throw new IllegalArgumentException("The house to be updated cannot be null!");
         }
         houseDao.update(house);
     }
@@ -69,7 +72,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public void deleteHouse(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("cannot delete null house");
+            throw new IllegalArgumentException("The house to be deleted cannot be null!");
         }
         houseDao.remove(house);
     }
@@ -77,7 +80,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public void createHouse(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("cannot create null house");
+            throw new IllegalArgumentException("The house to be created cannot be null!");
         }
         houseDao.create(house);
     }
@@ -85,7 +88,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public boolean isHouseHaunted(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("house cannot be null");
+            throw new IllegalArgumentException("The house cannot be null!");
         }
         return !(house.getGhosts().isEmpty());
     }
@@ -93,7 +96,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public boolean isOccupated(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("house cannot be null");
+            throw new IllegalArgumentException("The house cannot be null!");
         }
         return !(house.getResidents().isEmpty());
     }
@@ -101,7 +104,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public List<Ghost> getGhosts(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("house cannot be null");
+            throw new IllegalArgumentException("The house cannot be null!");
         }
         return new ArrayList<>(house.getGhosts());
     }
@@ -109,7 +112,7 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public List<Person> getInhabitants(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("house cannot be null");
+            throw new IllegalArgumentException("The house cannot be null!");
         }
         return new ArrayList<>(house.getResidents());
     }
@@ -117,9 +120,9 @@ public class HouseServiceImpl implements HouseService{
     @Override
     public Person getOwner(House house) throws DataAccessException, IllegalArgumentException {
         if (house == null) {
-            throw new IllegalArgumentException("house cannot be null");
+            throw new IllegalArgumentException("The house cannot be null!");
         }
         return personDao.findById(house.getOwnerID());
     }
-    
+
 }

@@ -96,7 +96,7 @@
             <scope>test</scope><!-- Otherwise conflicts with Tomcat libraries. -->
         </dependency>
         <dependency>
-            <groupId>org.apache.derby</groupId><!-- For embedded usage -->
+            <groupId>org.apache.derby</groupId><!-- For embedded usage. -->
             <artifactId>derby</artifactId>
         </dependency>
 

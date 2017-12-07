@@ -3,6 +3,7 @@ package fi.muni.pa165.hauntedhouses.facade;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -13,21 +14,27 @@ import java.util.List;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
 import fi.muni.pa165.hauntedhouses.entity.Person;
 import fi.muni.pa165.hauntedhouses.service.PersonService;
-import static org.mockito.Mockito.times;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+
 /**
- * 
+ *
  * @author Mario Majernik, 422165
  *
  */
-public class PersonFacadeTest extends AbstractFacadeTest{
+
+public class PersonFacadeTest extends AbstractFacadeTest {
 
     @Mock
     private PersonService personService;
@@ -37,13 +44,11 @@ public class PersonFacadeTest extends AbstractFacadeTest{
     private PersonFacadeImpl personFacade;
 
     private Person person;
-
     private PersonDTO personDTO;
+    private List<Person> people;
 
     private Long personId = 1L;
     private String personName = "Matej";
-    
-    private List<Person> persons;
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -64,7 +69,7 @@ public class PersonFacadeTest extends AbstractFacadeTest{
 
     @Test
     public void testCreatePerson() {
-    	when(beanMappingService.mapTo(personDTO, Person.class)).thenReturn(person);
+        when(beanMappingService.mapTo(personDTO, Person.class)).thenReturn(person);
         personFacade.registerPerson(personDTO);
 
         verify(personService).registerPerson(person, "pass");
@@ -73,7 +78,7 @@ public class PersonFacadeTest extends AbstractFacadeTest{
 
     @Test
     public void testUpdatePerson() {
-    	when(beanMappingService.mapTo(personDTO, Person.class)).thenReturn(person);
+        when(beanMappingService.mapTo(personDTO, Person.class)).thenReturn(person);
         personFacade.registerPerson(personDTO);
 
         verify(personService).registerPerson(person, "pass");
@@ -88,12 +93,12 @@ public class PersonFacadeTest extends AbstractFacadeTest{
 
     @Test
     public void testDeletePerson() {
-    	when(beanMappingService.mapTo(personDTO, Person.class)).thenReturn(person);
+        when(beanMappingService.mapTo(personDTO, Person.class)).thenReturn(person);
         personFacade.registerPerson(personDTO);
 
         verify(personService).registerPerson(person, "pass");
         verify(beanMappingService).mapTo(personDTO, Person.class);
-        
+
         personFacade.removePerson(personId);
         verify(personService).removePerson(person);
         verify(beanMappingService.mapTo(personDTO, Person.class));
@@ -147,10 +152,10 @@ public class PersonFacadeTest extends AbstractFacadeTest{
 
     @Test
     public void testFindByName() {
-        when(personService.findPersonByName(personName)).thenReturn(persons);
+        when(personService.findPersonByName(personName)).thenReturn(people);
 
         List<PersonDTO> personDTO = personFacade.findPersonByName(personName);
-        
+
         assertThat(personDTO).isNotNull();
         assertThat(person.getName()).isEqualTo(personDTO.get(0).getName());
         verify(personService).findPersonByName(personName);
@@ -167,4 +172,5 @@ public class PersonFacadeTest extends AbstractFacadeTest{
         verify(personService).findPersonByName(personName);
         verify(beanMappingService, never()).mapTo(any(), any());
     }
+    
 }

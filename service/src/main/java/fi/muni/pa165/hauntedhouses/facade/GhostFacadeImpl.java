@@ -8,13 +8,20 @@ import fi.muni.pa165.hauntedhouses.entity.Ghost;
 import fi.muni.pa165.hauntedhouses.entity.House;
 import fi.muni.pa165.hauntedhouses.service.BeanMappingService;
 import fi.muni.pa165.hauntedhouses.service.GhostService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author Marek Bohm, 396257
+ */
 
 @Service
 @Transactional
@@ -30,55 +37,56 @@ public class GhostFacadeImpl implements GhostFacade {
 
     @Override
     public GhostDTO createGhost(GhostDTO ghostDTO) {
-        log.debug("Registering ghostDTO {}", ghostDTO);
+        log.debug("Creating the ghost {}", ghostDTO);
         Ghost ghost = beanMappingService.mapTo(ghostDTO, Ghost.class);
         ghostService.createGhost(ghost);
         ghostDTO.setId(ghost.getId());
-        return ghostDTO;    }
+        return ghostDTO;
+    }
 
     @Override
     public void updateGhost(GhostDTO ghostDTO) {
-        log.debug("Updating ghostDto {}", ghostDTO);
+        log.debug("Updating the ghost {}", ghostDTO);
         Ghost ghost = beanMappingService.mapTo(ghostDTO, Ghost.class);
         ghostService.updateGhost(ghost);
     }
 
     @Override
     public void deleteGhost(Long id) {
-        log.debug("Deleting ghost with id {}", id);
+        log.debug("Deleting the ghost with the ID {}", id);
         Ghost ghost = beanMappingService.mapTo(findById(id), Ghost.class);
         ghostService.deleteGhost(ghost);
     }
 
     @Override
     public GhostDTO findById(Long id) {
-        log.debug("Finding ghost by id: {}", id);
-        return  beanMappingService.mapTo(ghostService.findById(id), GhostDTO.class);
+        log.debug("Finding a ghost by the ID {}", id);
+        return beanMappingService.mapTo(ghostService.findById(id), GhostDTO.class);
     }
 
     @Override
     public GhostDTO findByName(String name) {
-        log.debug("Finding ghost by name: {}", name);
-        return  beanMappingService.mapTo(ghostService.findByName(name), GhostDTO.class);
+        log.debug("Finding a ghost by the name {}", name);
+        return beanMappingService.mapTo(ghostService.findByName(name), GhostDTO.class);
     }
 
     @Override
     public List<GhostDTO> findAllGhosts() {
-        log.debug("Getting all people");
+        log.debug("Fetching all ghosts");
         List<Ghost> ghosts = ghostService.findAll();
         return ghosts == null ? null : beanMappingService.mapTo(ghosts, GhostDTO.class);
     }
 
     @Override
     public List<GhostDTO> findByAbility(AbilityDTO abilityDTO) {
-        log.debug("Finding ghosts by abilityDTO: {}", abilityDTO);
+        log.debug("Finding all ghosts with the ability {}", abilityDTO);
         Ability ability = beanMappingService.mapTo(abilityDTO, Ability.class);
-        return  beanMappingService.mapTo(ghostService.findByAbility(ability), GhostDTO.class);
+        return beanMappingService.mapTo(ghostService.findByAbility(ability), GhostDTO.class);
     }
 
     @Override
     public void giveAbility(GhostDTO ghostDTO, AbilityDTO abilityDTO) {
-        log.debug("Giving ability {} to ghost {}", abilityDTO, ghostDTO);
+        log.debug("Giving the ability {} to the ghost {}", abilityDTO, ghostDTO);
         ghostService.giveAbility(
                 beanMappingService.mapTo(ghostDTO, Ghost.class),
                 beanMappingService.mapTo(abilityDTO, Ability.class)
@@ -87,7 +95,7 @@ public class GhostFacadeImpl implements GhostFacade {
 
     @Override
     public void removeAbility(GhostDTO ghostDTO, AbilityDTO abilityDTO) {
-        log.debug("Removing ability {} from ghost {}", abilityDTO, ghostDTO);
+        log.debug("Removing the ability {} from the ghost {}", abilityDTO, ghostDTO);
         ghostService.removeAbility(
                 beanMappingService.mapTo(ghostDTO, Ghost.class),
                 beanMappingService.mapTo(abilityDTO, Ability.class)
@@ -96,7 +104,7 @@ public class GhostFacadeImpl implements GhostFacade {
 
     @Override
     public void hauntHouse(HouseDTO houseDTO, GhostDTO ghostDTO) {
-        log.debug("Haunting house {} with ghost {}", houseDTO, ghostDTO);
+        log.debug("Haunting the house {} with the ghost {}", houseDTO, ghostDTO);
         ghostService.hauntHouse(
                 beanMappingService.mapTo(houseDTO, House.class),
                 beanMappingService.mapTo(ghostDTO, Ghost.class)
@@ -105,7 +113,7 @@ public class GhostFacadeImpl implements GhostFacade {
 
     @Override
     public boolean isGhostHaunting(GhostDTO ghostDTO) {
-        log.debug("Checking if ghost {} is haunting", ghostDTO);
+        log.debug("Checking whether the ghost {} is haunting", ghostDTO);
         Ghost ghost = beanMappingService.mapTo(ghostDTO, Ghost.class);
         return ghostService.isGhostHaunting(ghost);
     }

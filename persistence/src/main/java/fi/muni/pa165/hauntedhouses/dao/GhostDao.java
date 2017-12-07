@@ -20,7 +20,7 @@ public interface GhostDao {
     public void create(Ghost ghost);
 
     /**
-     * Update a specific ghost.
+     * Updates a specific ghost.
      *
      * @param ghost the ghost to be updated
      */

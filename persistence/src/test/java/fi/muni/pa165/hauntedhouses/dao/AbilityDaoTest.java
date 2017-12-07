@@ -28,12 +28,13 @@ public class AbilityDaoTest extends AbstractDaoTest {
 
     @Test
     public void testCreate() {
-
         Ability newAbility = new Ability();
         newAbility.setName("Fire in the hole");
         newAbility.setType(AbilityType.FIRE);
         abilityDao.create(newAbility);
+        
         assertThat(abilityDao.findById(newAbility.getId())).isNotNull();
+        
         abilityDao.remove(newAbility);
     }
 
@@ -58,6 +59,7 @@ public class AbilityDaoTest extends AbstractDaoTest {
     @Test
     public void testFindByID() {
         Ability testAbility = abilityDao.findById(trapAbility.getId());
+        
         assertThat(testAbility.getName()).isEqualTo("Trap ability 3000");
         assertThat(testAbility.getType()).isEqualTo(AbilityType.TRAP);
     }

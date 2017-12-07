@@ -48,9 +48,9 @@ public interface PersonDao {
     public Person findPersonByLogin(String login);
 
     /**
-     * Retrieves a list of all people from the database.
+     * Returns a list of all people in the database.
      *
-     * @return a list of all people from the database
+     * @return a list of all people in the database
      */
     public List<Person> findAll();
 }

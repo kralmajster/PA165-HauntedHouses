@@ -6,85 +6,102 @@ import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
 
 import java.util.List;
 
-
 /**
- * Created by Marek Bohm 396257
+ * Created by Marek Bohm, 396257.
  */
+
 public interface HouseFacade {
 
     /**
-     * Create new house
-     * @param h house to be created
-     * @return id of new house
+     * Creates a new house.
+     *
+     * @param house the house to be created
+     * @return the newly created house
      */
-    HouseDTO createHouse(HouseDTO h);
+    HouseDTO createHouse(HouseDTO house);
 
     /**
-     * Update given house
-     * @param h house to be updated
+     * Updates the given house.
+     *
+     * @param house the house to be updated
      */
-    void updateHouse(HouseDTO h);
+    void updateHouse(HouseDTO house);
 
     /**
-     * Delete house with given id
-     * @param id of house to be deleted
+     * Deletes the house with the given ID.
+     *
+     * @param id of the house to be deleted
      */
     void deleteHouse(Long id);
 
     /**
-     * Find house with given id
-     * @param id of house to be found
-     * @return house with given id
+     * Finds the house with the given ID.
+     *
+     * @param id of the house to be found
+     * @return the house with the given ID
      */
     HouseDTO findById(Long id);
 
     /**
-     * Find house with given name
-     * @param name of house to be found
-     * @return house with given name
+     * Finds the house with the given name.
+     *
+     * @param name of the house to be found
+     * @return the house with the given name
      */
     HouseDTO findByName(String name);
 
     /**
-     * Find house with given address
-     * @param address of house to be found
-     * @return house with given address
+     * Finds the house with the given address.
+     *
+     * @param address of the house to be found
+     * @return the house with the given address
      */
     HouseDTO findByAddress(String address);
 
     /**
-     * Find all houses.
-     * @return List of all houses.
+     * Finds all houses.
+     *
+     * @return the list of all houses
      */
     List<HouseDTO> findAllHouses();
 
     /**
-     * @param h HouseDTO
-     * @return true if is haunted, else false
+     * Determines whether a particular house is haunted by ghosts.
+     * 
+     * @param house to be used
+     * @return true if the house is haunted, false otherwise
      */
-    boolean isHouseHaunted(HouseDTO h);
+    boolean isHouseHaunted(HouseDTO house);
 
     /**
-     * @param h HouseDTO
-     * @return true if has tenants, else false
+     * Determines whether a particular house is occupied by tenants.
+     * 
+     * @param house to be used
+     * @return true if the house has tenants, false otherwise
      */
-    boolean isOccupated(HouseDTO h);
+    boolean isOccupied(HouseDTO house);
 
     /**
-     * @param h HouseDTO
-     * @return list of all ghosts haunting given house
+     * Returns a list of ghosts that are haunting a particular house.
+     * 
+     * @param house to be used
+     * @return the list of all ghosts that are haunting the given house
      */
-    List<GhostDTO> getGhosts(HouseDTO h);
+    List<GhostDTO> getGhosts(HouseDTO house);
 
     /**
-     * @param h HouseDTO
-     * @return list of all people living in given house
+     * Returns a list of all people that are living in a particular house.
+     * 
+     * @param house to be used
+     * @return the list of all people that are living in the given house
      */
-    List<PersonDTO> getInhabitants(HouseDTO h);
+    List<PersonDTO> getInhabitants(HouseDTO house);
 
     /**
-     * @param h HouseDTO
-     * @return PersonDTO - owner of given house
+     * Returns the owner of the given house.
+     * 
+     * @param house to be used
+     * @return the owner of the given house
      */
-    PersonDTO getOwner(HouseDTO h);
+    PersonDTO getOwner(HouseDTO house);
 }

@@ -8,78 +8,80 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- *
- * @author Marek Bohm
+ * Created by Marek Bohm, 396257.
  */
+
 public interface PersonFacade {
 
     /**
-     * Registers new person in the system
-     * @param p - PersonDTO
-     * @return newly created person
+     * Creates a new person in the system.
+     *
+     * @param person to be created
+     * @return the newly created person
      */
-    PersonDTO registerPerson(PersonDTO p);
+    PersonDTO registerPerson(PersonDTO person);
 
     /**
-     * Removes given person
-     * @param id - user's id
+     * Removes the given person by her/his ID.
+     *
+     * @param id of the person to be removed
      */
     void removePerson(Long id);
 
     /**
-     * Update given person
-     * @param p persom to be updated
+     * Updates the given person.
+     *
+     * @param person the person to be updated
      */
-    void updatePerson(PersonDTO p);
+    void updatePerson(PersonDTO person);
 
     /**
-     * Get all people
+     * Returns a list of all people in the system.
      *
-     * @return Collection<PersonDTO> people
+     * @return the list of all people
      */
     Collection<PersonDTO> getAllPeople();
 
     /**
-     * Authenticate person in the system
+     * Authenticates a person in the system.
      *
-     * @param p - PersonDTO
-     * @param password - user's password
-     * @return true if the authentication was successful
+     * @param person the person to be authenticated
+     * @param password the person's password
+     * @return true if the authentication was successful, false otherwise
      */
-    boolean authenticate(PersonDTO p, String password);
+    boolean authenticate(PersonDTO person, String password);
 
     /**
-     * Check wheter a person has is allowed for action
+     * Checks whether a particular person has the required rights to perform an action.
      *
-     * @param u - PersonDTO
-     * @return true if person is allowed for action, else false
+     * @param person to be used
+     * @param accessConstraints the constraints to be checked
+     * @return true if the person has the required rights, false otherwise
      */
-    boolean isAllowed(PersonDTO p, List<Role> accessConstraint);
+    boolean isAllowed(PersonDTO person, List<Role> accessConstraints);
 
     /**
-     * Find person by id
+     * Finds a person by her/his ID.
      *
-     * @param id - user's id
-     * @return found person or null
+     * @param id the person's ID
+     * @return the found person
      */
     PersonDTO findPersonById(Long id);
 
     /**
-     * Find person by name
+     * Finds a person by her/his name.
      *
-     * @param name - user's login
-     * @return found person or null
+     * @param name the person's name
+     * @return the found person
      */
     List<PersonDTO> findPersonByName(String name);
 
     /**
-     * Person's current house will be changed
-     * @param house - HouseDTO which should be inhabited
-     * @param person - PersonDTO which should be moving
+     * Changes the house where a particular person lives.
+     *
+     * @param house the house to which the person is moving
+     * @param person the person which is moving
      */
     void inhabitHouse(HouseDTO house, PersonDTO person);
-
-
-
 
 }

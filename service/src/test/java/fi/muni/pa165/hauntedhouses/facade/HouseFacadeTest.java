@@ -3,6 +3,7 @@ package fi.muni.pa165.hauntedhouses.facade;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -12,21 +13,24 @@ import java.util.List;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
+
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import fi.muni.pa165.hauntedhouses.dto.HouseDTO;
 import fi.muni.pa165.hauntedhouses.entity.House;
 import fi.muni.pa165.hauntedhouses.service.HouseService;
-import static org.mockito.Mockito.times;
+
 /**
- * 
+ *
  * @author Mario Majernik, 422165
  *
  */
-public class HouseFacadeTest extends AbstractFacadeTest{
+
+public class HouseFacadeTest extends AbstractFacadeTest {
 
     @Mock
     private HouseService houseService;
@@ -36,7 +40,6 @@ public class HouseFacadeTest extends AbstractFacadeTest{
     private HouseFacadeImpl houseFacade;
 
     private House house;
-
     private HouseDTO houseDTO;
 
     private Long houseId = 1L;
@@ -56,55 +59,55 @@ public class HouseFacadeTest extends AbstractFacadeTest{
         houseDTO = new HouseDTO();
         houseDTO.setName(houseName);
     }
-    
+
     @Test
     public void testCreateHouse() {
-    	when(beanMappingService.mapTo(houseDTO, House.class)).thenReturn(house);
-    	houseFacade.createHouse(houseDTO);
+        when(beanMappingService.mapTo(houseDTO, House.class)).thenReturn(house);
+        houseFacade.createHouse(houseDTO);
 
-    	verify(houseService).createHouse(house);
+        verify(houseService).createHouse(house);
         verify(beanMappingService).mapTo(houseDTO, House.class);
     }
-    
+
     @Test
     public void testUpdateHouse() {
-    	when(beanMappingService.mapTo(houseDTO, House.class)).thenReturn(house);
-    	houseFacade.createHouse(houseDTO);
+        when(beanMappingService.mapTo(houseDTO, House.class)).thenReturn(house);
+        houseFacade.createHouse(houseDTO);
 
-    	verify(houseService).createHouse(house);
+        verify(houseService).createHouse(house);
         verify(beanMappingService).mapTo(houseDTO, House.class);
-        
+
         houseDTO.setHistory("new history");
-        
+
         houseFacade.updateHouse(houseDTO);
         verify(houseService).updateHouse(house);
         verify(beanMappingService, times(2)).mapTo(houseDTO, House.class);
     }
-    
+
     @Test
     public void testDeleteHouse() {
-    	when(beanMappingService.mapTo(houseDTO, House.class)).thenReturn(house);
-    	houseFacade.createHouse(houseDTO);
+        when(beanMappingService.mapTo(houseDTO, House.class)).thenReturn(house);
+        houseFacade.createHouse(houseDTO);
 
-    	verify(houseService).createHouse(house);
+        verify(houseService).createHouse(house);
         verify(beanMappingService).mapTo(houseDTO, House.class);
-        
+
         houseFacade.deleteHouse(houseId);
         verify(houseService).deleteHouse(house);
         verify(beanMappingService.mapTo(houseDTO, House.class));
     }
-    
+
     @Test
     public void testFindAll() {
         when(houseService.findAllHouses()).thenReturn(Collections.singletonList(house));
 
         List<HouseDTO> abilities = houseFacade.findAllHouses();
 
-        assertThat(house.getName()).isEqualTo( abilities.get(0).getName());
+        assertThat(house.getName()).isEqualTo(abilities.get(0).getName());
         verify(houseService).findAllHouses();
         verify(beanMappingService).mapTo(Collections.singletonList(house), HouseDTO.class);
     }
-    
+
     @Test
     public void testFindAllWithNull() {
         when(houseService.findAllHouses()).thenReturn(null);
@@ -115,7 +118,7 @@ public class HouseFacadeTest extends AbstractFacadeTest{
         verify(houseService).findAllHouses();
         verify(beanMappingService, never()).mapTo(any(), any());
     }
-    
+
     @Test
     public void testFindById() {
         when(houseService.findById(houseId)).thenReturn(house);
@@ -161,4 +164,5 @@ public class HouseFacadeTest extends AbstractFacadeTest{
         verify(houseService).findByName(houseName);
         verify(beanMappingService, never()).mapTo(any(), any());
     }
+    
 }

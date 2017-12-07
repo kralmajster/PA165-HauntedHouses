@@ -81,6 +81,7 @@ public class PersonDaoTest extends AbstractDaoTest {
     public void removeNotInDBTest() {
         personDao.create(p2);
         personDao.remove(p1);
+        
         assertThat(personDao.findAll()).containsOnly(p2);
     }
 

@@ -5,45 +5,52 @@ import fi.muni.pa165.hauntedhouses.dto.AbilityDTO;
 import java.util.List;
 
 /**
- * Created by Marek Bohm 396257
+ * Created by Marek Bohm, 396257.
  */
+
 public interface AbilityFacade {
 
     /**
-     * Create new ability
-     * @param a ability to be created
+     * Creates a new ability.
+     *
+     * @param ability the ability to be created
      */
-    void createAbility(AbilityDTO a);
+    void createAbility(AbilityDTO ability);
 
     /**
-     * Update given ability
-     * @param a ability to be updated
+     * Updates the given ability.
+     *
+     * @param ability the ability to be updated
      */
-    void updateAbility(AbilityDTO a);
+    void updateAbility(AbilityDTO ability);
 
     /**
-     * Delete ability with given id
-     * @param id of ability to be deleted
+     * Deletes the ability with the given ID.
+     *
+     * @param id of the ability to be deleted
      */
     void deleteAbility(Long id);
 
     /**
-     * Find ability with given id
-     * @param id of ability to be found
-     * @return ability with given id
+     * Finds the ability with the given ID.
+     *
+     * @param id of the ability to be found
+     * @return the ability with the given ID
      */
     AbilityDTO findById(Long id);
 
     /**
-     * Find ability with given name
-     * @param name of ability to be found
-     * @return ability with given name
+     * Finds the ability with the given name.
+     *
+     * @param name of the ability to be found
+     * @return the ability with the given name
      */
     AbilityDTO findByName(String name);
 
     /**
-     * Find all abilities.
-     * @return List of all abilities.
+     * Finds all abilities.
+     *
+     * @return list of all abilities
      */
     List<AbilityDTO> findAllAbilities();
 }

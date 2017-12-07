@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,14 +22,13 @@ public abstract class AbstractFacadeTest {
     protected BeanMappingService beanMappingService;
 
     public static final Object unwrapProxy(Object bean) throws Exception {
-    /*
-     * If the given object is a proxy, set the return value as the object
-     * being proxied, otherwise return the given object.
-     */
+        // If the given object is a proxy, set the return value as the object
+        // being proxied, otherwise return the given object.
         if (AopUtils.isAopProxy(bean) && bean instanceof Advised) {
             Advised advised = (Advised) bean;
             bean = advised.getTargetSource().getTarget();
         }
         return bean;
     }
+    
 }
