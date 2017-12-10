@@ -2,16 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
     <parent>
-        <artifactId>haunted-houses-parent</artifactId>
         <groupId>fi.muni.pa165</groupId>
+        <artifactId>haunted-houses-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <artifactId>haunted-houses-web</artifactId>
     <packaging>war</packaging>
-    <name>Rest + angular layer</name>
+    <name>Haunted Houses: REST and Angular Layer</name>
 
     <build>
         <plugins>
@@ -33,12 +34,14 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- Tomcat: -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-api</artifactId>
             <version>9.0.0.M13</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Spring: -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -63,10 +66,10 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
         </dependency>
+        <!-- Other: -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.8.3</version>
         </dependency>
     </dependencies>
 
