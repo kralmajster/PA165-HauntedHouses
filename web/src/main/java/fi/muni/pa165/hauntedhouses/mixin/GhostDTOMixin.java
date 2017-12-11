@@ -9,5 +9,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties({ //TODO
 	})
-public abstract class AbilityDTOMixin {
+public abstract class GhostDTOMixin {
 }
