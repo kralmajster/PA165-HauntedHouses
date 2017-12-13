@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Klara Kufova, 410091
  */
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND, reason="The requested resource was not found.")
-public class ResourceNotFound extends RuntimeException {
-    
+@ResponseStatus(value = HttpStatus.CONFLICT, reason = "The resource already exists.")
+public class ResourceConflict extends RuntimeException {
+
 }

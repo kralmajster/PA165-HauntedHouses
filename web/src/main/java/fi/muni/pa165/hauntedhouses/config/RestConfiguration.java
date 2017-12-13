@@ -1,7 +1,7 @@
 package fi.muni.pa165.hauntedhouses.config;
 
-
 import java.text.SimpleDateFormat;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -25,16 +25,24 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import fi.muni.pa165.hauntedhouses.controllers.AbilityController;
 import fi.muni.pa165.hauntedhouses.dto.AbilityDTO;
+import fi.muni.pa165.hauntedhouses.dto.GhostDTO;
+import fi.muni.pa165.hauntedhouses.dto.HouseDTO;
+import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
 import fi.muni.pa165.hauntedhouses.mixin.AbilityDTOMixin;
+import fi.muni.pa165.hauntedhouses.mixin.GhostDTOMixin;
+import fi.muni.pa165.hauntedhouses.mixin.HouseDTOMixin;
+import fi.muni.pa165.hauntedhouses.mixin.PersonDTOMixin;
 
 /**
- * 
- * @author Mario Majernik, 422165
+ *
+ * @author Mario Majernik (422165)
+ * @author Klara Kufova (410091)
  *
  */
+
 @Configuration
 @EnableWebMvc
-@Import({ServiceConfiguration.class, /*SampleDataConfiguration.class*/})
+@Import({ServiceConfiguration.class, SampleDataConfiguration.class})
 @ComponentScan(basePackageClasses = {AbilityController.class})
 public class RestConfiguration extends WebMvcConfigurerAdapter {
 
@@ -56,6 +64,9 @@ public class RestConfiguration extends WebMvcConfigurerAdapter {
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
 
         objectMapper.addMixIn(AbilityDTO.class, AbilityDTOMixin.class);
+        objectMapper.addMixIn(GhostDTO.class, GhostDTOMixin.class);
+        objectMapper.addMixIn(HouseDTO.class, HouseDTOMixin.class);
+        objectMapper.addMixIn(PersonDTO.class, PersonDTOMixin.class);
 
         objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
 

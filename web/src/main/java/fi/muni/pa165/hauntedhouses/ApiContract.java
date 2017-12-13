@@ -1,6 +1,7 @@
 package fi.muni.pa165.hauntedhouses;
 
 public abstract class ApiContract {
+
     public static final String REST = "/rest";
 
     public static final class Ability {

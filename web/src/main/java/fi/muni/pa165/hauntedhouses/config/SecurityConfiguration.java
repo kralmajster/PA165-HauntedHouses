@@ -15,39 +15,43 @@ import fi.muni.pa165.hauntedhouses.security.CustomAuthenticationProvider;
 import fi.muni.pa165.hauntedhouses.security.RestAuthenticationEntryPoint;
 
 /**
-* @author Mario Majernik, 422165
-*/
+ * @author Mario Majernik, 422165
+ */
+
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = {CustomAuthenticationProvider.class})
 @Import(RestConfiguration.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-@Inject
-private CustomAuthenticationProvider customAuthenticationProvider;
+    @Inject
+    private CustomAuthenticationProvider customAuthenticationProvider;
 
-@Inject
-private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    @Inject
+    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
-@Override
-protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.authenticationProvider(customAuthenticationProvider);
-}
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(customAuthenticationProvider);
+    }
 
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-    http
-            .exceptionHandling()
-            .authenticationEntryPoint(restAuthenticationEntryPoint).and()
-            .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/rest/**").permitAll()
-            //TODO
-            .antMatchers("/js/**").permitAll()
-            .antMatchers("/partials/**").permitAll()
-            .antMatchers("/index.html").permitAll()
-            .anyRequest().authenticated().and()
-            .formLogin().loginPage("/login.html").permitAll().and()
-            .logout().logoutUrl("/logout.html").logoutSuccessUrl("/index.html?logout").permitAll().and().csrf().disable();
-}
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(restAuthenticationEntryPoint).and()
+                .authorizeRequests()
+                
+                .antMatchers(HttpMethod.GET, "/rest/**").permitAll()
+                // TODO
+
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/partials/**").permitAll()
+                .antMatchers("/index.html").permitAll()
+                
+                .anyRequest().authenticated().and()
+                .formLogin().loginPage("/login.html").permitAll().and()
+                .logout().logoutUrl("/logout.html").logoutSuccessUrl("/index.html?logout").permitAll().and().csrf().disable();
+    }
 
 }

@@ -26,4 +26,5 @@ public class SampleDataConfiguration {
     public void dataLoading() {
         initializer.loadData();
     }
+    
 }

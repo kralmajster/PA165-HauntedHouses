@@ -33,6 +33,11 @@
             <artifactId>haunted-houses-service</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>fi.muni.pa165</groupId>
+            <artifactId>haunted-houses-sample-data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- Tomcat: -->
         <dependency>

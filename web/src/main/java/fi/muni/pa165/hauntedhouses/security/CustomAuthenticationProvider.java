@@ -18,16 +18,18 @@ import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
 import fi.muni.pa165.hauntedhouses.facade.PersonFacade;
 
 /**
- * 
+ *
  * @author Mario Majernik, 422165
  *
  */
+
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Inject
     private PersonFacade personFacade;
 
+    @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         PersonDTO user = (PersonDTO) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
@@ -37,8 +39,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString()));
 
             return new UsernamePasswordAuthenticationToken(user, password, grantedAuths);
-        }else {
-            throw new BadCredentialsException("Wrong password.");
+        } else {
+            throw new BadCredentialsException("Invalid password.");
         }
     }
 
