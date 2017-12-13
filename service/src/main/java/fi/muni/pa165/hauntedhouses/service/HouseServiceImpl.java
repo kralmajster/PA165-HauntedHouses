@@ -26,6 +26,9 @@ public class HouseServiceImpl implements HouseService {
 
     @Inject
     private PersonDao personDao;
+    
+    @Inject
+    private PersonService personService;
 
     @Override
     public List<House> findAllHouses() throws DataAccessException {
@@ -82,6 +85,17 @@ public class HouseServiceImpl implements HouseService {
         if (house == null) {
             throw new IllegalArgumentException("The house to be created cannot be null!");
         }
+        houseDao.create(house);
+    }
+    
+    @Override
+    public void buildHouse(House house, long ownerID) throws DataAccessException, IllegalArgumentException {
+        Person owner = personService.findPersonById(ownerID);
+        if (owner == null) {
+            throw new IllegalArgumentException("The owner cannot be null!");
+        }
+        
+        house.setOwnerID(ownerID);
         houseDao.create(house);
     }
 

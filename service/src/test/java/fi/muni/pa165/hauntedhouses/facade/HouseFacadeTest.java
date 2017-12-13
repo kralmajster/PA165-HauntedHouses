@@ -164,5 +164,5 @@ public class HouseFacadeTest extends AbstractFacadeTest {
         verify(houseService).findByName(houseName);
         verify(beanMappingService, never()).mapTo(any(), any());
     }
-    
+
 }

@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author Klara Kufova, 410091
+ * @author Mario Majernik (422165)
  */
 
-@JsonIgnoreProperties({ })
+@JsonIgnoreProperties({ "ghosts", "residents" })
 public abstract class HouseDTOMixin {
-    
-    // TODO
     
 }

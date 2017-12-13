@@ -1,6 +1,7 @@
 package fi.muni.pa165.hauntedhouses.facade;
 
 import fi.muni.pa165.hauntedhouses.dto.GhostDTO;
+import fi.muni.pa165.hauntedhouses.dto.HouseCreateDTO;
 import fi.muni.pa165.hauntedhouses.dto.HouseDTO;
 import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
 
@@ -16,9 +17,15 @@ public interface HouseFacade {
      * Creates a new house.
      *
      * @param house the house to be created
-     * @return the newly created house
      */
-    HouseDTO createHouse(HouseDTO house);
+    void createHouse(HouseDTO house);
+    
+    /**
+     * Builds a new house for its owner.
+     *
+     * @param house the house to be built
+     */
+    void buildHouse(HouseCreateDTO house);
 
     /**
      * Updates the given house.

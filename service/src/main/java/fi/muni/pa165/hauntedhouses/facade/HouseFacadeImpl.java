@@ -1,6 +1,7 @@
 package fi.muni.pa165.hauntedhouses.facade;
 
 import fi.muni.pa165.hauntedhouses.dto.GhostDTO;
+import fi.muni.pa165.hauntedhouses.dto.HouseCreateDTO;
 import fi.muni.pa165.hauntedhouses.dto.HouseDTO;
 import fi.muni.pa165.hauntedhouses.dto.PersonDTO;
 import fi.muni.pa165.hauntedhouses.entity.House;
@@ -34,12 +35,16 @@ public class HouseFacadeImpl implements HouseFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public HouseDTO createHouse(HouseDTO houseDTO) {
+    public void createHouse(HouseDTO houseDTO) {
         log.debug("Creating the house {}", houseDTO);
         House house = beanMappingService.mapTo(houseDTO, House.class);
         houseService.createHouse(house);
-        houseDTO.setId(house.getId());
-        return houseDTO;
+    }
+    
+    @Override
+    public void buildHouse(HouseCreateDTO houseCreateDTO) {
+        log.debug("Building the house {}", houseCreateDTO);
+        houseService.buildHouse(beanMappingService.mapTo(houseCreateDTO, House.class), houseCreateDTO.getOwnerID());
     }
 
     @Override
