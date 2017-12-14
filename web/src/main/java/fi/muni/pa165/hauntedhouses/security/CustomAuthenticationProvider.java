@@ -31,12 +31,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        PersonDTO user = (PersonDTO) authentication.getPrincipal();
+        String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        if (personFacade.authenticate(user, password)) {
+        if (personFacade.authenticate(username, password)) {
+            PersonDTO user = personFacade.findPersonByLogin(username);
+            
             List<GrantedAuthority> grantedAuths = new ArrayList<>();
-            grantedAuths.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().toString()));
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
 
             return new UsernamePasswordAuthenticationToken(user, password, grantedAuths);
         } else {

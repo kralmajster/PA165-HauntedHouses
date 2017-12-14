@@ -1,3 +1,1 @@
-/**
- * //TODO
- */
+var hauntedHousesControllers = angular.module("hauntedHousesControllers", ['hauntedHousesServices']);

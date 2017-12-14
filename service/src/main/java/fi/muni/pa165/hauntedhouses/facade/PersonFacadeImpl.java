@@ -85,6 +85,12 @@ public class PersonFacadeImpl implements PersonFacade {
     }
 
     @Override
+    public PersonDTO findPersonByLogin(String username) {
+        log.debug("Finding a person by the username {}", username);
+        return beanMappingService.mapTo(personService.findPersonByLogin(username), PersonDTO.class);
+    }
+
+    @Override
     public void inhabitHouse(HouseDTO houseDTO, PersonDTO personDTO) {
         log.debug("Moving the person {} to the house {}", personDTO, houseDTO);
         personService.inhabitHouse(
@@ -94,9 +100,8 @@ public class PersonFacadeImpl implements PersonFacade {
     }
 
     @Override
-    public boolean authenticate(PersonDTO personDTO, String password) {
-        log.debug("Authenticating the person {} with the password {}", personDTO, password);
-        Person person = beanMappingService.mapTo(personDTO, Person.class);
-        return personService.authenticate(person, password);
+    public boolean authenticate(String username, String password) {
+        log.debug("Authenticating the user {} with the password {}", username, password);
+        return personService.authenticate(personService.findPersonByLogin(username), password);
     }
 }

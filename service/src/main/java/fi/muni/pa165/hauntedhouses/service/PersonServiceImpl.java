@@ -52,7 +52,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public boolean authenticate(Person person, String password) throws DataAccessException, IllegalArgumentException {
-        return validatePassword(password, person.getPasswordHash());
+        return person != null && validatePassword(password, person.getPasswordHash());
     }
 
     @Override
@@ -72,6 +72,14 @@ public class PersonServiceImpl implements PersonService {
             throw new IllegalArgumentException("The ID cannot be null!");
         }
         return personDao.findById(id);
+    }
+
+    @Override
+    public Person findPersonByLogin(String username) throws DataAccessException, IllegalArgumentException {
+        if (username == null) {
+            throw new IllegalArgumentException("The username cannot be null!");
+        }
+        return personDao.findPersonByLogin(username);
     }
 
     @Override
@@ -112,15 +120,15 @@ public class PersonServiceImpl implements PersonService {
         final int SALT_BYTE_SIZE = 24;
         final int HASH_BYTE_SIZE = 24;
         final int PBKDF2_ITERATIONS = 1000;
-        
+
         // Generate a random salt:
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_BYTE_SIZE];
         random.nextBytes(salt);
-        
+
         // Hash the password:
         byte[] hash = pbkdf2(password.toCharArray(), salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
-        
+
         // Format "iterations:salt:hash":
         return PBKDF2_ITERATIONS + ":" + toHex(salt) + ":" + toHex(hash);
     }
@@ -165,9 +173,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     /**
-     * Compares two byte arrays in length-constant time.
-     * This comparison method is used so that password hashes cannot be extracted from an on-line system
-     * using a timing attack and then attacked off-line.
+     * Compares two byte arrays in length-constant time. This comparison method is used so that password hashes cannot be
+     * extracted from an on-line system using a timing attack and then attacked off-line.
      *
      * @param a the first byte array
      * @param b the second byte array

@@ -45,11 +45,11 @@ public interface PersonFacade {
     /**
      * Authenticates a person in the system.
      *
-     * @param person the person to be authenticated
+     * @param username the username of the person to be authenticated
      * @param password the person's password
      * @return true if the authentication was successful, false otherwise
      */
-    boolean authenticate(PersonDTO person, String password);
+    boolean authenticate(String username, String password);
 
     /**
      * Checks whether a particular person has the required rights to perform an action.
@@ -75,6 +75,14 @@ public interface PersonFacade {
      * @return the found person
      */
     List<PersonDTO> findPersonByName(String name);
+
+    /**
+     * Finds a person by her/his username in the system.
+     *
+     * @param username the person's username in the system
+     * @return the found person
+     */
+    PersonDTO findPersonByLogin(String username);
 
     /**
      * Changes the house where a particular person lives.
