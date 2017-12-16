@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Houses</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+        <h3>List of houses</h3>
+        
+        <br><br>
+
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="house in houses">
+                    <td scope="row"><a ng-href="#!/house/{{house.id}}/houses">{{house.name}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>
+</html>

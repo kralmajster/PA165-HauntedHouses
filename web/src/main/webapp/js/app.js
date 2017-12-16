@@ -6,6 +6,18 @@ module.config(function ($routeProvider) {
             .when('/', {
                 templateUrl: 'partials/home.html'
             })
+            .when('/houses', {
+                templateUrl: 'partials/houses.html',
+                controller: 'housesCtrl'
+            })
+            .when('/ghosts', {
+                templateUrl: 'partials/ghosts.html',
+                controller: 'ghostsCtrl'
+            })
+            .when('/abilities', {
+                templateUrl: 'partials/abilities.html',
+                controller: 'abilitiesCtrl'
+            })
             .when('/forbidden', {
                 templateUrl: 'partials/forbidden.html'
             })
@@ -13,7 +25,6 @@ module.config(function ($routeProvider) {
 
 });
 
-/*
 module.run(function ($rootScope, $location, $window, loggedUserFactory) {
 
     loggedUserFactory.getPrincipal(
@@ -27,7 +38,7 @@ module.run(function ($rootScope, $location, $window, loggedUserFactory) {
             function (response) {
                 alert("An error occurred when getting the logged user.");
             }
-    );
+    ); 
 
     $rootScope.unsuccessfulResponse = function (response) {
         if (response.status === 403) {
@@ -44,4 +55,3 @@ module.run(function ($rootScope, $location, $window, loggedUserFactory) {
     };
 
 });
-*/

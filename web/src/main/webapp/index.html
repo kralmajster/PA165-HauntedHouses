@@ -20,7 +20,7 @@
 
         <div class="container">
             <nav class="navbar navbar-light bg-faded" style="margin: 40px 0px 20px;">
-                
+
                 <!--<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header"
                 aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>-->
 
@@ -32,20 +32,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="https://github.com/klarakufova/PA165-HauntedHouses" target="_blank">About</a>
                             </li>
-                            <li class="nav-item" ng-switch-when="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT" ng-switch-when-separator="|">
+                            <!-- TODO: fix the roles! -->
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT" ng-switch-when-separator="|">
                                 <a class="nav-link" href="#!/houses">Houses</a>
                             </li>
-                            <li class="nav-item" ng-switch-when="ROLE_ADMIN">
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
                                 <a class="nav-link" href="#!/ghosts">Ghosts</a>
                             </li>
-                            <li class="nav-item" ng-switch-when="ROLE_ADMIN">
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
                                 <a class="nav-link" href="#!/abilities">Abilities</a>
                             </li>
-                            <li class="nav-item" ng-show="role === 'ROLE_ANONYMOUS'">
-                                <a class="nav-link" href="login.html">Log in</a>
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                                <a class="nav-link" href="logout.html">Log out ({{principal}})</a>
                             </li>
-                            <li class="nav-item" ng-show="role !== 'ROLE_ANONYMOUS'">
-                                <a class="nav-link" href="logout.html">Log out </a>
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                                <a class="nav-link" href="login.html">Log in</a>
                             </li>
                         </ul>
                     </div>
@@ -69,7 +70,7 @@
                     <div ng-view></div>
                 </div>
             </div>
-        
+
         </div>
 
     </body>

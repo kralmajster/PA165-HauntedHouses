@@ -18,7 +18,6 @@ import fi.muni.pa165.hauntedhouses.security.RestAuthenticationEntryPoint;
 /**
  * @author Mario Majernik, 422165
  */
-
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = {CustomAuthenticationProvider.class})
@@ -38,28 +37,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	
-    	http.exceptionHandling()
-            .authenticationEntryPoint(restAuthenticationEntryPoint).and()
-            .authorizeRequests()
-            
-            .antMatchers(HttpMethod.GET, "/rest/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.ADMIN.name())
-            .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.OWNER.name())
-            .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.RESIDENT.name())
-            .antMatchers(HttpMethod.PUT, "/rest/houses").hasRole(Role.ADMIN.name())
-            .antMatchers(HttpMethod.POST, "/rest/houses").hasRole(Role.ADMIN.name())
-            .antMatchers(HttpMethod.POST, "/rest/houses").hasRole(Role.OWNER.name())
-            .antMatchers(HttpMethod.DELETE, "/rest/houses").hasRole(Role.ADMIN.name())
-            // TODO
 
-            .antMatchers("/js/**").permitAll()
-            .antMatchers("/partials/**").permitAll()
-            .antMatchers("/index.html").permitAll()
-            
-            .anyRequest().authenticated().and()
-            .formLogin().loginPage("/login.html").permitAll().and()
-            .logout().logoutUrl("/logout.html").logoutSuccessUrl("/index.html?logout").permitAll().and().csrf().disable();
-}
+        http.exceptionHandling()
+                .authenticationEntryPoint(restAuthenticationEntryPoint).and()
+                .authorizeRequests()
+                
+                .antMatchers(HttpMethod.GET, "/rest/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.OWNER.name())
+                .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.RESIDENT.name())
+                .antMatchers(HttpMethod.PUT, "/rest/houses").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/rest/houses").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/rest/houses").hasRole(Role.OWNER.name())
+                .antMatchers(HttpMethod.DELETE, "/rest/houses").hasRole(Role.ADMIN.name())
+                // TODO
+
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/partials/**").permitAll()
+                .antMatchers("/index.html").permitAll()
+                
+                .anyRequest().authenticated().and()
+                .formLogin().loginPage("/login.html").permitAll().and()
+                .logout().logoutUrl("/logout.html").logoutSuccessUrl("/index.html?logout").permitAll().and().csrf().disable();
+    }
 
 }

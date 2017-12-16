@@ -8,7 +8,7 @@ public abstract class ApiContract {
         public static final String BASE = "/ability";
         public static final String ID = "/{id}";
         public static final String PATH_ID = "id";
-        // TODO
+        public static final String GHOSTS = "/{id}/ghosts";
     }
 
     public static final class Ghost {
