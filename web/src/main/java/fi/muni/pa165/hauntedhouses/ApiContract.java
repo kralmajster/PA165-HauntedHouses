@@ -15,7 +15,8 @@ public abstract class ApiContract {
         public static final String BASE = "/ghost";
         public static final String ID = "/{id}";
         public static final String PATH_ID = "id";
-        // TODO
+        public static final String ABILITIES = "/{id}/abilities";
+        public static final String HOUSE = "/{id}/house";
     }
 
     public static final class House {
