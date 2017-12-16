@@ -23,7 +23,7 @@ hs_err_pid*
 /target/
 
 # IDEA generated files #
-HauntedHouses.iml
+*.iml
 .idea/
 /persistence/target/
 /api/target/

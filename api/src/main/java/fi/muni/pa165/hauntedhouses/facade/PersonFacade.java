@@ -40,7 +40,7 @@ public interface PersonFacade {
      *
      * @return the list of all people
      */
-    Collection<PersonDTO> getAllPeople();
+    List<PersonDTO> getAllPeople();
 
     /**
      * Authenticates a person in the system.

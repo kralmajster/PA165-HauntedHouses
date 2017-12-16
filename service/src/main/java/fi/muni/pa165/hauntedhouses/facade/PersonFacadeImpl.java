@@ -59,7 +59,7 @@ public class PersonFacadeImpl implements PersonFacade {
     }
 
     @Override
-    public Collection<PersonDTO> getAllPeople() {
+    public List<PersonDTO> getAllPeople() {
         log.debug("Fetching all people");
         List<Person> people = personService.getAllPeople();
         return people == null ? null : beanMappingService.mapTo(people, PersonDTO.class);
