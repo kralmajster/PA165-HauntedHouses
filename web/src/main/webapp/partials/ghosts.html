@@ -5,10 +5,29 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    
+
     <body>
-        
+
         <h3>List of ghosts</h3>
-    
+
+        <br>
+
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th></th>
+                    <th>NAME</th>
+                    <th>LIVES IN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ghost in ghosts">
+                    <td scope="row">{{ghost.id}}</td>
+                    <td scope="row"><a ng-href="#!/ghosts/{{ghost.id}}">{{ghost.name}}</a></td>
+                    <td scope="row">{{ghost.house.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+
     </body>
 </html>

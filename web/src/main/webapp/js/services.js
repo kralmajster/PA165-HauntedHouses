@@ -3,16 +3,16 @@ var urlBase = "http://localhost:8080/pa165/rest";
 
 hauntedHousesServices.factory('abilityFactory', ['$http',
     function ($http) {
-        var urlAbilities = urlBase.concat("/ability");
-        var urlAbility = urlAbilities.concat("/{id}");
+        var urlAbility = urlBase.concat("/ability");
+        var urlAbilityId = urlAbility.concat("/{id}");
         var dataFactory = {};
 
         dataFactory.getAllAbilities = function (success, error) {
-            return $http.get(urlAbilities).then(success, error);
+            return $http.get(urlAbility).then(success, error);
         };
 
         dataFactory.getAbility = function (id, success, error) {
-            return $http.get(urlAbilities + "/" + id).then(success, error);
+            return $http.get(urlAbility + "/" + id).then(success, error);
         };
 
         return dataFactory;
@@ -21,16 +21,20 @@ hauntedHousesServices.factory('abilityFactory', ['$http',
 
 hauntedHousesServices.factory('houseFactory', ['$http',
     function ($http) {
-        var urlHouses = urlBase.concat("/house");
-        var urlHouse = urlHouses.concat("/{id}");
+        var urlHouse = urlBase.concat("/house");
+        var urlHouseId = urlHouse.concat("/{id}");
         var dataFactory = {};
 
         dataFactory.getAllHouses = function (success, error) {
-            return $http.get(urlHouses).then(success, error);
+            return $http.get(urlHouse).then(success, error);
         };
 
         dataFactory.getHouse = function (id, success, error) {
-            return $http.get(urlHouses + "/" + id).then(success, error);
+            return $http.get(urlHouse + "/" + id).then(success, error);
+        };
+
+        dataFactory.createHouse = function (house, success, error) {
+            return $http.post(urlBase + "/houses/newhouse", house).then(success, error);
         };
 
         return dataFactory;
@@ -45,6 +49,10 @@ hauntedHousesServices.factory('ghostFactory', ['$http',
 
         dataFactory.getAllGhosts = function (success, error) {
             return $http.get(urlGhost).then(success, error);
+        };
+        
+        dataFactory.getGhost = function (id, success, error) {
+            return $http.get(urlGhost + "/" + id).then(success, error);
         };
 
         dataFactory.giveAbilityToGhost = function (ghostId, success, error) {

@@ -53,17 +53,22 @@ public class InitializerImpl implements Initializer {
     }
     
     private void createAbilities() {
-        createAbility("burning blood", AbilityType.FIRE, Collections.EMPTY_SET);
-        createAbility("confusion", AbilityType.CHASE, Collections.EMPTY_SET);
-        createAbility("shadows", AbilityType.DARKNESS, Collections.EMPTY_SET);
+        String descriptionBlood = "This ability causes feelings similar to blood burning.";
+        createAbility("Blood burning", descriptionBlood, AbilityType.FIRE);
+        
+        String descriptionConfusion = "The victim loses sense of the current situation.";
+        createAbility("Confusion", descriptionConfusion, AbilityType.CHASE);
+        
+        String descriptionShadows = "This castes shadows into the surroundings.";
+        createAbility("Shadows", descriptionShadows, AbilityType.DARKNESS);
     }
     
-    private void createAbility(String name, AbilityType type, Set<Ghost> ghosts) {
+    private void createAbility(String name, String description, AbilityType type) {
         Ability ability = new Ability();
         
         ability.setName(name);
+        ability.setDescription(description);
         ability.setType(type);
-        ability.setGhosts(ghosts);
         
         abilityService.createAbility(ability);
     }
@@ -92,35 +97,41 @@ public class InitializerImpl implements Initializer {
         House lair = houseService.findByName("The Lair");
         
         Set<Ability> zombieAbilities = new HashSet();
-        zombieAbilities.add(abilityService.findByName("confusion"));
-        from.set(Calendar.HOUR_OF_DAY, 3);
-        to.set(Calendar.HOUR_OF_DAY, 13);
-        createGhost("zombie", from.getTime(), to.getTime(), abandonedFactory, zombieAbilities);
+        zombieAbilities.add(abilityService.findByName("Confusion"));
+        
+        from.set(from.get(Calendar.YEAR), from.get(Calendar.MONTH), from.get(Calendar.DAY_OF_MONTH), 3, 0);
+        to.set(to.get(Calendar.YEAR), to.get(Calendar.MONTH), to.get(Calendar.DAY_OF_MONTH), 13, 0);
+        String zombieDescription = "An undead created through the reanimation of a human corpse.";
+        createGhost("Zombie", from.getTime(), to.getTime(), zombieDescription, abandonedFactory, zombieAbilities);
         
         Set<Ability> witchAbilities = new HashSet();
-        witchAbilities.add(abilityService.findByName("burning blood"));
-        witchAbilities.add(abilityService.findByName("shadows"));
-        from.set(Calendar.HOUR_OF_DAY, 8);
-        to.set(Calendar.HOUR_OF_DAY, 22);
-        createGhost("witch", from.getTime(), to.getTime(), hovel, witchAbilities);
+        witchAbilities.add(abilityService.findByName("Blood burning"));
+        witchAbilities.add(abilityService.findByName("Shadows"));
+        from.set(from.get(Calendar.YEAR), from.get(Calendar.MONTH), from.get(Calendar.DAY_OF_MONTH), 8, 0);
+        to.set(to.get(Calendar.YEAR), to.get(Calendar.MONTH), to.get(Calendar.DAY_OF_MONTH), 22, 0);
+        String witchDescription = "A woman practicing black witchcraft with the aid of a devil.";
+        createGhost("Witch", from.getTime(), to.getTime(), witchDescription, hovel, witchAbilities);
         
-        from.set(Calendar.HOUR_OF_DAY, 0);
-        to.set(Calendar.HOUR_OF_DAY, 4);
-        createGhost("werewolf", from.getTime(), to.getTime(), lair, Collections.EMPTY_SET);
+        from.set(from.get(Calendar.YEAR), from.get(Calendar.MONTH), from.get(Calendar.DAY_OF_MONTH), 0, 0);
+        to.set(to.get(Calendar.YEAR), to.get(Calendar.MONTH), to.get(Calendar.DAY_OF_MONTH), 5, 0);
+        String werewolfDescription = "A human with the ability to shapeshift into a wolf.";
+        createGhost("Werewolf", from.getTime(), to.getTime(), werewolfDescription, lair, Collections.EMPTY_SET);
         
         Set<Ability> vampireAbilities = new HashSet();
-        vampireAbilities.add(abilityService.findByName("shadows"));
-        from.set(Calendar.HOUR_OF_DAY, 22);
-        to.set(Calendar.HOUR_OF_DAY, 4);
-        createGhost("vampire", from.getTime(), to.getTime(), abandonedFactory, vampireAbilities);
+        vampireAbilities.add(abilityService.findByName("Shadows"));
+        from.set(from.get(Calendar.YEAR), from.get(Calendar.MONTH), from.get(Calendar.DAY_OF_MONTH), 22, 0);
+        to.set(to.get(Calendar.YEAR), to.get(Calendar.MONTH), to.get(Calendar.DAY_OF_MONTH), 4, 0);
+        String vampireDescription = "A creature that subsists by feeding on the life essence (generally in the form of blood) of the living.";
+        createGhost("Vampire", from.getTime(), to.getTime(), vampireDescription, abandonedFactory, vampireAbilities);
     }
     
-    private void createGhost(String name, Date hauntFrom, Date hauntTo, House house, Set<Ability> abilities) {
+    private void createGhost(String name, Date hauntFrom, Date hauntTo, String description, House house, Set<Ability> abilities) {
         Ghost ghost = new Ghost();
         
         ghost.setName(name);
         ghost.setHauntFrom(hauntFrom);
         ghost.setHauntTo(hauntTo);
+        ghost.setDescription(description);
         ghost.setHouse(house);
         ghost.setAbilities(abilities);
         

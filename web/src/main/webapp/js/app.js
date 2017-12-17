@@ -10,13 +10,29 @@ module.config(function ($routeProvider) {
                 templateUrl: 'partials/houses.html',
                 controller: 'housesCtrl'
             })
+            .when('/houses/newhouse', {
+                templateUrl: 'partials/new_house.html',
+                controller: 'newHouseCtrl'
+            })
+            .when('/houses/:id', {
+                templateUrl: 'partials/house_detail.html',
+                controller: 'houseDetailCtrl'
+            })
             .when('/ghosts', {
                 templateUrl: 'partials/ghosts.html',
                 controller: 'ghostsCtrl'
             })
+            .when('/ghosts/:id', {
+                templateUrl: 'partials/ghost_detail.html',
+                controller: 'ghostDetailCtrl'
+            })
             .when('/abilities', {
                 templateUrl: 'partials/abilities.html',
                 controller: 'abilitiesCtrl'
+            })
+            .when('/abilities/:id', {
+                templateUrl: 'partials/ability_detail.html',
+                controller: 'abilityDetailCtrl'
             })
             .when('/forbidden', {
                 templateUrl: 'partials/forbidden.html'
@@ -38,7 +54,7 @@ module.run(function ($rootScope, $location, $window, loggedUserFactory) {
             function (response) {
                 alert("An error occurred when getting the logged user.");
             }
-    ); 
+    );
 
     $rootScope.unsuccessfulResponse = function (response) {
         if (response.status === 403) {

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author Mario Majernik (422165)
  */
 
-@JsonIgnoreProperties({ "abilities" })
+@JsonIgnoreProperties({ })
 public abstract class GhostDTOMixin {
     
 }

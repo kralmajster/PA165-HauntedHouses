@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Abilities</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -9,6 +9,25 @@
     <body>
         
         <h3>List of abilities</h3>
+
+        <br>
+
+        <table class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th></th>
+                    <th>NAME</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ability in abilities">
+                    <td scope="row">{{ability.id}}</td>
+                    <td scope="row"><a ng-href="#!/abilities/{{ability.id}}">{{ability.name}}</a></td>
+                    <td scope="row">{{ability.description}}</td>
+                </tr>
+            </tbody>
+        </table>
         
     </body>
     

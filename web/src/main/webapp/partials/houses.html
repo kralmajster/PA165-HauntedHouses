@@ -23,7 +23,7 @@
             <tbody>
                 <tr ng-repeat="house in houses">
                     <td scope="row">{{house.id}}</td>
-                    <td scope="row"><a ng-href="#!/house/{{house.id}}/houses">{{house.name}}</a></td>
+                    <td scope="row"><a ng-href="#!/houses/{{house.id}}">{{house.name}}</a></td>
                     <td scope="row">{{house.address}}</td>
                     <td scope="row">{{house.ownerID}}</td>
                 </tr>
@@ -31,7 +31,7 @@
         </table>
 
         <!-- Add a new house: -->
-        <a href="#!/admin/newcategory" class="btn btn-primary">
+        <a href="#!/houses/newhouse" class="btn btn-primary">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Create house
         </a>
