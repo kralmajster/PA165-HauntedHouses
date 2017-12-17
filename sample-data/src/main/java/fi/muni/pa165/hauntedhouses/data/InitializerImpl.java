@@ -11,10 +11,12 @@ import fi.muni.pa165.hauntedhouses.service.GhostService;
 import fi.muni.pa165.hauntedhouses.service.HouseService;
 import fi.muni.pa165.hauntedhouses.service.PersonService;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -132,8 +134,18 @@ public class InitializerImpl implements Initializer {
         House abandonedFactory = houseService.findByName("The Abandoned Factory");
         House lair = houseService.findByName("The Lair");
         
-        createOwner("Alfred Pennyworth", "apennyworth", "owner", hovel);
-        createOwner("James Gordon", "jgordon", "owner", abandonedFactory);
+        House hovelID = houseService.findById(hovel.getId());
+        House abandonedFactoryID = houseService.findById(abandonedFactory.getId());
+        House lairID = houseService.findById(lair.getId());
+        
+        List<House> alfredOwns = new ArrayList<>();
+        alfredOwns.add(hovelID);
+        alfredOwns.add(abandonedFactoryID);
+        createOwner("Alfred Pennyworth", "apennyworth", "owner", alfredOwns);
+        
+        List<House> jamesOwns = new ArrayList<>();
+        jamesOwns.add(lairID);
+        createOwner("James Gordon", "jgordon", "owner", jamesOwns);
         
         createTenant("Damian Wayne", "dwayne", "tenant", hovel);
         createTenant("Selina Kyle", "skyle", "tenant", abandonedFactory);
@@ -150,15 +162,19 @@ public class InitializerImpl implements Initializer {
         personService.registerPerson(admin, password);
     }
     
-    private void createOwner(String name, String login, String password, House house) {
+    private void createOwner(String name, String login, String password, List<House> ownsHouses) {
         Person owner = new Person();
         
         owner.setName(name);
         owner.setLogin(login);
         owner.setType(Role.OWNER);
-        owner.setHouse(house);
         
         personService.registerPerson(owner, password);
+        
+        ownsHouses.stream().forEach((house) -> {
+            house.setOwnerID(owner.getId());
+            houseService.updateHouse(house);
+        });
     }
     
     private void createTenant(String name, String login, String password, House house) {

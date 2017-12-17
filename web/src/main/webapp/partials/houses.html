@@ -8,21 +8,33 @@
     <body>
 
         <h3>List of houses</h3>
-        
-        <br><br>
+
+        <br>
 
         <table class="table">
             <thead class="thead-inverse">
                 <tr>
-                    <th>Name</th>
+                    <th></th>
+                    <th>NAME</th>
+                    <th>ADDRESS</th>
+                    <th>OWNER'S ID</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="house in houses">
+                    <td scope="row">{{house.id}}</td>
                     <td scope="row"><a ng-href="#!/house/{{house.id}}/houses">{{house.name}}</a></td>
+                    <td scope="row">{{house.address}}</td>
+                    <td scope="row">{{house.ownerID}}</td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Add a new house: -->
+        <a href="#!/admin/newcategory" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Create house
+        </a>
 
     </body>
 </html>

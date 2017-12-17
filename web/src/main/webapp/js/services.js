@@ -3,7 +3,7 @@ var urlBase = "http://localhost:8080/pa165/rest";
 
 hauntedHousesServices.factory('abilityFactory', ['$http',
     function ($http) {
-        var urlAbilities = urlBase.concat("/abilities");
+        var urlAbilities = urlBase.concat("/ability");
         var urlAbility = urlAbilities.concat("/{id}");
         var dataFactory = {};
 
@@ -21,7 +21,7 @@ hauntedHousesServices.factory('abilityFactory', ['$http',
 
 hauntedHousesServices.factory('houseFactory', ['$http',
     function ($http) {
-        var urlHouses = urlBase.concat("/houses");
+        var urlHouses = urlBase.concat("/house");
         var urlHouse = urlHouses.concat("/{id}");
         var dataFactory = {};
 
