@@ -168,7 +168,7 @@ public class InitializerImpl implements Initializer {
         
         admin.setName(name);
         admin.setLogin(login);
-        admin.setType(Role.ADMIN);
+        admin.setRole(Role.ADMIN);
         
         personService.registerPerson(admin, password);
     }
@@ -178,7 +178,7 @@ public class InitializerImpl implements Initializer {
         
         owner.setName(name);
         owner.setLogin(login);
-        owner.setType(Role.OWNER);
+        owner.setRole(Role.OWNER);
         
         personService.registerPerson(owner, password);
         
@@ -193,7 +193,7 @@ public class InitializerImpl implements Initializer {
         
         tenant.setName(name);
         tenant.setLogin(login);
-        tenant.setType(Role.RESIDENT);
+        tenant.setRole(Role.RESIDENT);
         tenant.setHouse(house);
         
         personService.registerPerson(tenant, password);
