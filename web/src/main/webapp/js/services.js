@@ -15,8 +15,15 @@ hauntedHousesServices.factory('abilityFactory', ['$http',
             return $http.get(urlAbility + "/" + id).then(success, error);
         };
 
+        dataFactory.getAbilityTypes = function (success, error) {
+            return $http.get(urlAbility + "/types").then(success, error);
+        };
+
         return dataFactory;
+        
     }
+    
+    
 ]);
 
 hauntedHousesServices.factory('houseFactory', ['$http',
@@ -36,6 +43,10 @@ hauntedHousesServices.factory('houseFactory', ['$http',
         dataFactory.createHouse = function (house, success, error) {
             return $http.post(urlBase + "/houses/newhouse", house).then(success, error);
         };
+
+        dataFactory.getAllPeople = function (success, error) {
+            return $http.get(urlHouse + "/people").then(success, error);
+        }
 
         return dataFactory;
     }

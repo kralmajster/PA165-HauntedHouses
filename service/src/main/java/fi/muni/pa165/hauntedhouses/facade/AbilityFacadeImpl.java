@@ -2,6 +2,7 @@ package fi.muni.pa165.hauntedhouses.facade;
 
 import fi.muni.pa165.hauntedhouses.dto.AbilityDTO;
 import fi.muni.pa165.hauntedhouses.entity.Ability;
+import fi.muni.pa165.hauntedhouses.enums.AbilityType;
 import fi.muni.pa165.hauntedhouses.service.AbilityService;
 import fi.muni.pa165.hauntedhouses.service.BeanMappingService;
 
@@ -45,9 +46,14 @@ public class AbilityFacadeImpl implements AbilityFacade {
 
     @Override
     public void deleteAbility(Long id) {
+        
         log.debug("Deleting the ability with the ID {}", id);
+        /*
         Ability ability = beanMappingService.mapTo(findById(id), Ability.class);
         abilityService.deleteAbility(ability);
+*/
+        //just a workaround
+        abilityService.deleteAbility(abilityService.findById(id));
     }
 
     @Override
@@ -71,4 +77,8 @@ public class AbilityFacadeImpl implements AbilityFacade {
         return abilities == null ? null : beanMappingService.mapTo(abilities, AbilityDTO.class);
     }
     
+    @Override
+    public List<AbilityType> getAbilityTypes() {
+        return abilityService.getAbilityTypes();
+    }
 }

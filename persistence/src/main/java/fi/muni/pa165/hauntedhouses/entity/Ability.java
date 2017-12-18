@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 
 import fi.muni.pa165.hauntedhouses.enums.AbilityType;
+import javax.persistence.CascadeType;
 
 /**
  * @author Adam Dobiáš, 451044
@@ -35,7 +36,8 @@ public class Ability {
     @NotNull
     private AbilityType type;
 
-    @ManyToMany(mappedBy = "abilities")
+    @ManyToMany(mappedBy = "abilities",
+            cascade = CascadeType.ALL)
     private Set<Ghost> ghosts = new HashSet<>();
 
     // Constructors:
@@ -44,7 +46,11 @@ public class Ability {
     }
 
     // Getters and setters:
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+      
     public Long getId() {
         return id;
     }
@@ -89,6 +95,16 @@ public class Ability {
         this.ghosts.remove(ghost);
     }
 
+    @Override
+    public String toString() {
+        return "Ability{" + "id=" + id + 
+                ", name=" + name + 
+                ", description=" + description +
+                ", type=" + type +  '}';
+    }
+
+    
+    
     @Override
     public int hashCode() {
         final int prime = 31;
