@@ -6,31 +6,31 @@ module.config(function ($routeProvider) {
             .when('/', {
                 templateUrl: 'partials/home.html'
             })
-            .when('/houses', {
+            .when('/house', {
                 templateUrl: 'partials/houses.html',
                 controller: 'housesCtrl'
             })
-            .when('/houses/newhouse', {
+            .when('/house/newhouse', {
                 templateUrl: 'partials/new_house.html',
                 controller: 'newHouseCtrl'
             })
-            .when('/houses/:id', {
+            .when('/house/:id', {
                 templateUrl: 'partials/house_detail.html',
                 controller: 'houseDetailCtrl'
             })
-            .when('/ghosts', {
+            .when('/ghost', {
                 templateUrl: 'partials/ghosts.html',
                 controller: 'ghostsCtrl'
             })
-            .when('/ghosts/:id', {
+            .when('/ghost/:id', {
                 templateUrl: 'partials/ghost_detail.html',
                 controller: 'ghostDetailCtrl'
             })
-            .when('/abilities', {
+            .when('/ability', {
                 templateUrl: 'partials/abilities.html',
                 controller: 'abilitiesCtrl'
             })
-            .when('/abilities/:id', {
+            .when('/ability/:id', {
                 templateUrl: 'partials/ability_detail.html',
                 controller: 'abilityDetailCtrl'
             })

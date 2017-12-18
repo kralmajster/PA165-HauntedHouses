@@ -34,7 +34,7 @@ hauntedHousesServices.factory('houseFactory', ['$http',
         };
 
         dataFactory.createHouse = function (house, success, error) {
-            return $http.post(urlBase + "/houses/newhouse", house).then(success, error);
+            return $http.post(urlBase + "/house/newhouse", house).then(success, error);
         };
 
         return dataFactory;

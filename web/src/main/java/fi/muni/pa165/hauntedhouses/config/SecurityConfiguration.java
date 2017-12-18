@@ -41,24 +41,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .authenticationEntryPoint(restAuthenticationEntryPoint).and()
                 .authorizeRequests()
+
+                //.antMatchers(HttpMethod.GET, "/rest/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/rest/house").hasAnyRole(Role.ADMIN.name(), Role.OWNER.name(), Role.RESIDENT.name())
+                .antMatchers(HttpMethod.PUT, "/rest/house").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/rest/house").hasAnyRole(Role.ADMIN.name(), Role.OWNER.name())
+                .antMatchers(HttpMethod.DELETE, "/rest/house").hasRole(Role.ADMIN.name())
+
+                .antMatchers(HttpMethod.GET, "/rest/house/newhouse").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/rest/house/newhouse").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/rest/house/newhouse").hasRole(Role.ADMIN.name())
                 
-                .antMatchers(HttpMethod.GET, "/rest/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.OWNER.name())
-                .antMatchers(HttpMethod.GET, "/rest/houses").hasRole(Role.RESIDENT.name())
-                .antMatchers(HttpMethod.PUT, "/rest/houses").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.POST, "/rest/houses").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.POST, "/rest/houses").hasRole(Role.OWNER.name())
-                .antMatchers(HttpMethod.DELETE, "/rest/houses").hasRole(Role.ADMIN.name())
-                // TODO
-                
-                .antMatchers(HttpMethod.GET, "/rest/ghosts").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.GET, "/rest/ghosts").hasRole(Role.OWNER.name())
-                .antMatchers(HttpMethod.GET, "/rest/ghosts").hasRole(Role.RESIDENT.name())
-                .antMatchers(HttpMethod.PUT, "/rest/ghosts").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.POST, "/rest/ghosts").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.POST, "/rest/ghosts").hasRole(Role.OWNER.name())
-                .antMatchers(HttpMethod.DELETE, "/rest/ghosts").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/rest/ghost").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/rest/ghost").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/rest/ghost").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/rest/ghost").hasRole(Role.ADMIN.name())
+
+                .antMatchers(HttpMethod.GET, "/rest/ability").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, "/rest/ability").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.POST, "/rest/ability").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/rest/ability").hasRole(Role.ADMIN.name())
+
+                .antMatchers(HttpMethod.GET, "/rest/person").hasAnyRole(Role.ADMIN.name(), Role.OWNER.name(), Role.RESIDENT.name())
 
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/partials/**").permitAll()
