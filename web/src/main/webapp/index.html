@@ -16,9 +16,9 @@
         <script src="js/services.js" type="text/javascript"></script>
     </head>
 
-    <body data-ng-app="hauntedHouses">
+    <body ng-app="hauntedHouses">
 
-       <div class="container">
+        <div class="container">
             <nav class="navbar navbar-light bg-faded" style="margin: 40px 0px 20px;">
 
                 <!--<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header"
@@ -28,30 +28,30 @@
                     <a class="navbar-brand" href="#!/home.html">Home</a>
 
                     <div id="navbar" class="nav nav-tabs float-xs-right">
-                        <ul class="nav nav tabs" data-ng-switch="role">
+                        <ul class="nav nav tabs" ng-switch="role">
                             <li class="nav-item">
                                 <a class="nav-link" href="https://github.com/klarakufova/PA165-HauntedHouses" target="_blank">About</a>
                             </li>
                             <!-- TODO: fix the roles! -->
-                            <li class="nav-item" data-ng-show="role == ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT" data-ng-switch-when-separator="|">
-                                <a class="nav-link" href="#!/house">Houses</a>
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT" ng-switch-when-separator="|">
+                                <a class="nav-link" href="#!/houses">Houses</a>
                             </li>
-                            <li class="nav-item" data-ng-show="role == ROLE_ADMIN">
-                                <a class="nav-link" href="#!/ghost">Ghosts</a>
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                                <a class="nav-link" href="#!/ghosts">Ghosts</a>
                             </li>
-                            <li class="nav-item" data-ng-show="role == ROLE_ADMIN">
-                                <a class="nav-link" href="#!/ability">Abilities</a>
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                                <a class="nav-link" href="#!/abilities">Abilities</a>
                             </li>
-                            <li class="nav-item" data-ng-show="role != ROLE_ANONYMOUS">
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
                                 <a class="nav-link" href="logout.html">Log out ({{principal}})</a>
                             </li>
-                            <li class="nav-item" data-ng-show="role == ROLE_ANONYMOUS">
+                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
                                 <a class="nav-link" href="login.html">Log in</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-           </nav>
+            </nav>
 
             <div id="logoutOutput" class="alert alert-info" style="display: none;" role="alert">You have been logged out.</div>
 
@@ -67,7 +67,7 @@
 
             <div class="jumbotron" style="background-color:#f7f7f9">
                 <div class="row">
-                    <div data-ng-view></div>
+                    <div ng-view></div>
                 </div>
             </div>
 

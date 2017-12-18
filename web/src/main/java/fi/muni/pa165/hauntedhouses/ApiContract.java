@@ -32,9 +32,7 @@ public abstract class ApiContract {
         public static final String BASE = "/person";
         public static final String ID = "/{id}";
         public static final String PATH_ID = "id";
-        public static final String PERSONS = "/person/getAll";
-        public static final String LOGIN = "/login";
-        public static final String NAME = "/name";
+        // TODO
     }
 
 }
