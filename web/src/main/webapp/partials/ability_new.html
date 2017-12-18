@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>New ability form</h1>
+        <h3>Create new ability</h3>
 
         <form name="form" novalidate class="form-horizontal">
 
@@ -19,7 +19,7 @@
             </div>
 
             <div class="form-group" ng-class="{'has-error': !(form.address.$valid)}">
-                <label for="description" class="col-sm-2 control-label">Desctiption</label>
+                <label for="description" class="col-sm-2 control-label">Description</label>
                 <div class="col-sm-10">
                     <input placeholder="description" id="description" type="text" ng-minlength="0" name="description" class="form-control" ng-model="ability.description"/>
                 </div>
@@ -36,9 +36,6 @@
                 </div>
             </div>
            
-            
-                
-            
             <button ng-disabled="!form.$valid" ng-click="create(ability)" class="btn btn-primary" type="submit" >Create</button>
         </form>
 
