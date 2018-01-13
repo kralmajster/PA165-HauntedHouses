@@ -11,9 +11,9 @@ hauntedHousesControllers.controller('housesCtrl', function ($scope, $http, $root
     $scope.deleteHouse = function (house) {
         $http.delete('/pa165/rest/house/delete/{id}'.replace("{id}", house.id))
         .then(function success(response) {
-                houseFactory.getAllAbilities(
+                houseFactory.getAllHouses(
                     function (response) {
-                        $scope.abilities = response.data;
+                        $scope.houses = response.data;
                     },
                     $rootScope.unsuccessfulResponse
                 );
