@@ -59,7 +59,7 @@ hauntedHousesServices.factory('houseFactory', ['$http',
 
 hauntedHousesServices.factory('ghostFactory', ['$http',
     function ($http) {
-        var urlGhost = urlBase.concat("/ghost");
+        var urlGhost = urlBase.concat("/ghosts");
         var urlGhostId = urlGhost.concat("/{id}");
         var dataFactory = {};
 

@@ -34,12 +34,12 @@ public class Ghost {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @NotNull
+//    @NotNull
     @Temporal(TemporalType.TIME)
     @Column(nullable = false)
     private Date hauntFrom;
 
-    @NotNull
+//    @NotNull
     @Temporal(TemporalType.TIME)
     @Column(nullable = false)
     private Date hauntTo;

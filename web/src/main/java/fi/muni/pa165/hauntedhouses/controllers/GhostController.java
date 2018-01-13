@@ -38,18 +38,23 @@ public class GhostController {
     @Inject
     private GhostFacade ghostFacade;
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = ApiContract.Ghost.CREATE, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public final void createGhost(@Valid @RequestBody GhostDTO ghost, BindingResult result) {
-        if (result.hasErrors()) {
-            throw new ResourceNotValid();
-        }
+//        if (result.hasErrors()) {
+//            throw new ResourceNotValid();
+//        }
+        System.out.println("pred try");
 
         try {
             ghostFacade.createGhost(ghost);
+            System.out.println("za try");
+
         } catch (DataAccessException exception) {
+            System.out.println("data access e");
             throw new ResourceConflict();
         } catch (IllegalArgumentException exception) {
+            System.out.println("illegal arg e");
             throw new ResourceNotFound();
         }
     }

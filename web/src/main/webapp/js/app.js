@@ -30,7 +30,7 @@ module.config(function ($routeProvider) {
                 templateUrl: 'partials/ghost_detail.html',
                 controller: 'ghostDetailCtrl'
             })
-            .when('/ghosts/newghost', {
+            .when('/ghost/newghost', {
                 templateUrl: 'partials/ghost_new.html',
                 controller: 'newGhostCtrl'
             })

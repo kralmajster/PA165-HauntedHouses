@@ -125,18 +125,31 @@ hauntedHousesControllers.controller('ghostDetailCtrl', function ($scope, $routeP
             );
 });
 
-hauntedHousesControllers.controller('newGhostCtrl', function ($scope, $rootScope, $location, houseFactory, ghostFactory) {
+hauntedHousesControllers.controller('newGhostCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope, houseFactory, ghostFactory) {
+
+        houseFactory.getAllHouses(
+        function (response) {
+            $scope.houses = response.data;
+        },
+        $rootScope.unsuccessfulResponse
+    );
+
+    $scope.hauntFrom = "";
+    $scope.hauntTo = "";
+
     $scope.ghost = {
-        "name": '',
-        "hauntFrom": '1992-05-13 00:00',
-        "hauntTo": '1999-05-13 00:00',
+        'name': '',
+        'house': '',
+        'hauntFrom': '1992-05-13 00:00',
+        'hauntTo': '1999-05-13 00:00',
     };
 
 
-    var test = {
-        "name":"ddd234ddd",
-        "hauntFrom":"1992-05-13 00:00",
-        "hauntTo":"1999-05-13 00:00"
+    // var test = {
+    //     "name":"ddd234ddd",
+    //     "hauntFrom":"1992-05-13 00:00",
+    //     "hauntTo":"1999-05-13 00:00"
         // "house": {
         //     "id":1,
         //     "name":"The Hovel",
@@ -145,7 +158,7 @@ hauntedHousesControllers.controller('newGhostCtrl', function ($scope, $rootScope
         //     "history":"The hovel is an awful home of witches and their helpers.",
         //     "ownerID":2
         // }
-    };
+    // };
     //
     // var house = {
     //     "id":1,
@@ -157,21 +170,17 @@ hauntedHousesControllers.controller('newGhostCtrl', function ($scope, $rootScope
     // }
 
 
-    houseFactory.getAllHouses(
-        function (response) {
-            $scope.houses = response.data;
-        },
-        $rootScope.unsuccessfulResponse
-    );
-
-    $scope.create = function() {
-        ghostFactory.createGhost(test,//$scope.ghost,
-            function (response) {
-                $scope.ghost = response.data;
-                $location.path("/ghosts");
-            },
-            $rootScope.unsuccessfulResponse
-        );
+    $scope.create = function () {
+        $http({
+            method: 'POST',
+            url: '/pa165/rest/ghosts/create',
+            data: $scope.ghost
+        }).then(function success(response) {
+            //change view to list of products
+            $location.path("/ghosts");
+        }, function error(response) {
+            $rootScope.unsuccessfulResponse;
+        });
     };
 });
 

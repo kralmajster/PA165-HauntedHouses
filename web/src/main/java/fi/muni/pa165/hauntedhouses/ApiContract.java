@@ -21,12 +21,14 @@ public abstract class ApiContract {
     }
 
     public static final class Ghost {
-        public static final String BASE = "/ghost";
+        public static final String BASE = "/ghosts";
         public static final String ID = "/{id}";
         public static final String PATH_ID = "id";
         public static final String ABILITIES = "/{id}/abilities";
         public static final String HOUSE = "/{id}/house";
         public static final String UPDATE = "/update";
+        public static final String DELETE = "/delete/{id}";
+        public static final String CREATE = "/create";
 
     }
 

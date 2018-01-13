@@ -48,14 +48,8 @@ public class HouseController {
         if (result.hasErrors()) {
             throw new ResourceNotValid();
         }
-        System.out.println("fi.muni.pa165.hauntedhouses.controllers.HouseController.createHouse()" + house.getName());
-
         try {
-            System.out.println("try" + house.getName());
-            System.out.println("owners id: " + house.getOwnerID());
-
             houseFacade.buildHouse(house);
-            System.out.println("try2" + house.getName());
 
         } catch (DataAccessException exception) {
             throw new ResourceConflict();
