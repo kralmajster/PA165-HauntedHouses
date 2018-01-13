@@ -37,6 +37,7 @@ public abstract class ApiContract {
         public static final String OWNER = "/{id}/owner";
         public static final String CREATE = "/create";
         public static final String PEOPLE = "/people";
+        public static final String DELETE = "/delete/{id}";
         
     }
 

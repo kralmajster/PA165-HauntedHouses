@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/rest/house/*").hasRole(Role.ADMIN.name())
                 .antMatchers(HttpMethod.PUT, "/rest/house/*").hasRole(Role.ADMIN.name())
                 .antMatchers(HttpMethod.POST, "/rest/house/*").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, "/rest/house/*").hasRole(Role.ADMIN.name())
+
 
                 .antMatchers(HttpMethod.GET, "/rest/ghost").hasAnyRole(Role.ADMIN.name(), Role.OWNER.name())
                 .antMatchers(HttpMethod.PUT, "/rest/ghost").hasRole(Role.ADMIN.name())

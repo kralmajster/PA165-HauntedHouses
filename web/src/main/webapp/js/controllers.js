@@ -1,12 +1,26 @@
 var hauntedHousesControllers = angular.module("hauntedHousesControllers", ['hauntedHousesServices']);
 
-hauntedHousesControllers.controller('housesCtrl', function ($scope, $rootScope, houseFactory) {
+hauntedHousesControllers.controller('housesCtrl', function ($scope, $http, $rootScope, houseFactory) {
     houseFactory.getAllHouses(
             function (response) {
                 $scope.houses = response.data;
             },
             $rootScope.unsuccessfulResponse
             );
+
+    $scope.deleteHouse = function (house) {
+        $http.delete('/pa165/rest/house/delete/{id}'.replace("{id}", house.id))
+        .then(function success(response) {
+                houseFactory.getAllAbilities(
+                    function (response) {
+                        $scope.abilities = response.data;
+                    },
+                    $rootScope.unsuccessfulResponse
+                );
+            }, function error(response) {
+                $rootScope.unsuccessfulResponse;
+            });
+    };
 });
 
 hauntedHousesControllers.controller('houseDetailCtrl', function ($scope, $routeParams, $rootScope, houseFactory) {
@@ -34,7 +48,7 @@ hauntedHousesControllers.controller('newHouseCtrl',
         $scope.house = {
             'name': '',
             'address': '',
-            'ownerId': ''
+            'ownerID': ''
             
         };
 

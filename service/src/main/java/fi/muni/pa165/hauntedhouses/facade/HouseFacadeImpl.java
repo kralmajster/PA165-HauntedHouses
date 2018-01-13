@@ -44,7 +44,8 @@ public class HouseFacadeImpl implements HouseFacade {
     @Override
     public void buildHouse(HouseCreateDTO houseCreateDTO) {
         log.debug("Building the house {}", houseCreateDTO);
-        houseService.buildHouse(beanMappingService.mapTo(houseCreateDTO, House.class), houseCreateDTO.getOwnerID());
+
+        houseService.buildHouse(beanMappingService.mapTo(houseCreateDTO, House.class)/*, houseCreateDTO.getOwnerID()*/);
     }
 
     @Override
@@ -57,8 +58,8 @@ public class HouseFacadeImpl implements HouseFacade {
     @Override
     public void deleteHouse(Long id) {
         log.debug("Deleting the house with the ID {}", id);
-        House house = beanMappingService.mapTo(findById(id), House.class);
-        houseService.deleteHouse(house);
+//        House house = beanMappingService.mapTo(findById(id), House.class);
+        houseService.deleteHouse(houseService.findById(id));
     }
 
     @Override

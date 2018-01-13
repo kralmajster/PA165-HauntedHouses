@@ -85,11 +85,10 @@ public interface HouseService {
      * Builds a new house for its owner.
      * 
      * @param house to be built
-     * @param ownerID of the owner
      * @throws DataAccessException in case of any failure on the persistence layer
      * @throws IllegalArgumentException if the house is null or not present in the database
      */
-    void buildHouse(House house, long ownerID) throws DataAccessException, IllegalArgumentException;
+    void buildHouse(House house/*, long ownerID*/) throws DataAccessException, IllegalArgumentException;
 
     /**
      * Checks whether any ghosts live in a particular house.

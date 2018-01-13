@@ -26,6 +26,9 @@ module.config(function ($routeProvider) {
                 templateUrl: 'partials/ghost_detail.html',
                 controller: 'ghostDetailCtrl'
             })
+            // .when('/ghosts/newghost', {
+            //     templateUrl: 'partials/ghost_new.html',
+            //     controller: 'newHouseCtrl'
             .when('/abilities', {
                 templateUrl: 'partials/abilities.html',
                 controller: 'abilitiesCtrl'
