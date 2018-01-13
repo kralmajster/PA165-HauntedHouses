@@ -33,8 +33,7 @@ hauntedHousesControllers.controller('houseDetailCtrl', function ($scope, $routeP
             );
 });
 
-// unfinished, doesn't work:
-// ---------------
+
 hauntedHousesControllers.controller('newHouseCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope, houseFactory) {        
         
@@ -66,6 +65,45 @@ hauntedHousesControllers.controller('newHouseCtrl',
         };
    
 });
+
+hauntedHousesControllers.controller('updateHouseCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope, houseFactory) {
+
+    houseFactory.getHouse(
+            $routeParams.id,
+            function (response) {
+                $scope.house = response.data;
+            },
+            $rootScope.unsuccessfulResponse
+        );
+
+        houseFactory.getAllPeople(
+                function (response) {
+                    $scope.persons = response.data;
+                },
+                $rootScope.unsuccessfulResponse
+            );
+
+        $scope.house = {
+            'name': '',
+            'address': '',
+            'ownerID': ''
+        };
+
+
+        $scope.update = function (house) {
+            $http({
+                method: 'PUT',
+                url: '/pa165/rest/house/update',
+                data: house
+            }).then(function success(response) {
+                //change view to list of products
+                $location.path("/houses");
+            }, function error(response) {
+                $rootScope.unsuccessfulResponse;
+            });
+        };
+    });
 // ---------------
 
 hauntedHousesControllers.controller('ghostsCtrl', function ($scope, $rootScope, ghostFactory) {

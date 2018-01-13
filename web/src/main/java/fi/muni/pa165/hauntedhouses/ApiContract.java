@@ -26,6 +26,8 @@ public abstract class ApiContract {
         public static final String PATH_ID = "id";
         public static final String ABILITIES = "/{id}/abilities";
         public static final String HOUSE = "/{id}/house";
+        public static final String UPDATE = "/update";
+
     }
 
     public static final class House {
@@ -38,7 +40,7 @@ public abstract class ApiContract {
         public static final String CREATE = "/create";
         public static final String PEOPLE = "/people";
         public static final String DELETE = "/delete/{id}";
-        
+        public static final String UPDATE = "/update";
     }
 
     public static final class Person {

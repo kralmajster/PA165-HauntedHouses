@@ -18,6 +18,10 @@ module.config(function ($routeProvider) {
                 templateUrl: 'partials/house_detail.html',
                 controller: 'houseDetailCtrl'
             })
+            .when('/houses/update/:id', {
+                templateUrl: 'partials/house_update.html',
+                controller: 'updateHouseCtrl'
+            })
             .when('/ghosts', {
                 templateUrl: 'partials/ghosts.html',
                 controller: 'ghostsCtrl'

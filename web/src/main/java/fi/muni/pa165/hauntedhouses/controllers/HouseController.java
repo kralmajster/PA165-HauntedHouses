@@ -151,4 +151,19 @@ public class HouseController {
         return owner;
     }
 
+    @RequestMapping(value = ApiContract.House.UPDATE, method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateAbility(@Valid @RequestBody HouseDTO house, BindingResult result) {
+        if (result.hasErrors()) {
+            throw new ResourceNotValid();
+        }
+        try {
+            houseFacade.updateHouse(house);
+        } catch (DataAccessException e) {
+            throw new ResourceConflict();
+        } catch (IllegalArgumentException e) {
+            throw new ResourceNotFound();
+        }
+    }
+
 }

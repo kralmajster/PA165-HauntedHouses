@@ -19,6 +19,7 @@
                     <th>ADDRESS</th>
                     <th>OWNER'S ID</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,12 @@
                     <td scope="row">{{house.ownerID}}</td>
                     <td>
                         <button ng-click="deleteHouse(house)" type="submit" class="btn btn-primary">Delete</button>
+                    </td>
+                    <td>
+                        <a href="#!/houses/update/{{house.id}}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Update
+                        </a>
                     </td>
                 </tr>
             </tbody>
