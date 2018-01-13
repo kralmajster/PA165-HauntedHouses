@@ -16,36 +16,35 @@
         <script src="js/services.js" type="text/javascript"></script>
     </head>
 
-    <body ng-app="hauntedHouses">
+    <body data-ng-app="hauntedHouses">
 
         <div class="container">
             <nav class="navbar navbar-light bg-faded" style="margin: 40px 0px 20px;">
 
-                <!--<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header"
-                aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>-->
+                <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header"
+                aria-controls="navbar-header" aria-expanded="false" aria-label="Toggle navigation"></button>
 
                 <div class="collapse navbar-toggleable-xs" id="navbar-header">
                     <a class="navbar-brand" href="#!/home.html">Home</a>
 
                     <div id="navbar" class="nav nav-tabs float-xs-right">
-                        <ul class="nav nav tabs" ng-switch="role">
+                        <ul class="nav nav tabs" data-ng-switch="role">
                             <li class="nav-item">
                                 <a class="nav-link" href="https://github.com/klarakufova/PA165-HauntedHouses" target="_blank">About</a>
                             </li>
-                            <!-- TODO: fix the roles! -->
-                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT" ng-switch-when-separator="|">
+                            <li class="nav-item" data-ng-switch-when="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT" data-ng-switch-when-separator="|">
                                 <a class="nav-link" href="#!/houses">Houses</a>
                             </li>
-                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                            <li class="nav-item" data-ng-switch-when="ROLE_ADMIN|ROLE_OWNER" data-ng-switch-when-separator="|">
                                 <a class="nav-link" href="#!/ghosts">Ghosts</a>
                             </li>
-                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                            <li class="nav-item" data-ng-switch-when="ROLE_ADMIN">
                                 <a class="nav-link" href="#!/abilities">Abilities</a>
                             </li>
-                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                            <li class="nav-item" data-ng-show="role != 'ROLE_ANONYMOUS'">
                                 <a class="nav-link" href="logout.html">Log out ({{principal}})</a>
                             </li>
-                            <li class="nav-item" ng-show="ROLE_ADMIN|ROLE_OWNER|ROLE_RESIDENT">
+                            <li class="nav-item" data-ng-show="role === 'ROLE_ANONYMOUS'">
                                 <a class="nav-link" href="login.html">Log in</a>
                             </li>
                         </ul>
@@ -67,7 +66,7 @@
 
             <div class="jumbotron" style="background-color:#f7f7f9">
                 <div class="row">
-                    <div ng-view></div>
+                    <div data-ng-view></div>
                 </div>
             </div>
 
