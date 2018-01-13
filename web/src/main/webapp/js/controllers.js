@@ -125,6 +125,57 @@ hauntedHousesControllers.controller('ghostDetailCtrl', function ($scope, $routeP
             );
 });
 
+hauntedHousesControllers.controller('newGhostCtrl', function ($scope, $rootScope, $location, houseFactory, ghostFactory) {
+    $scope.ghost = {
+        "name": '',
+        "hauntFrom": '1992-05-13 00:00',
+        "hauntTo": '1999-05-13 00:00',
+    };
+
+
+    var test = {
+        "name":"ddd234ddd",
+        "hauntFrom":"1992-05-13 00:00",
+        "hauntTo":"1999-05-13 00:00"
+        // "house": {
+        //     "id":1,
+        //     "name":"The Hovel",
+        //     "address":"Bloodcurdling 666",
+        //     "becameHauntedDate":"1762-12-24 00:00",
+        //     "history":"The hovel is an awful home of witches and their helpers.",
+        //     "ownerID":2
+        // }
+    };
+    //
+    // var house = {
+    //     "id":1,
+    //     "name":"The Hovel",
+    //     "address":"Bloodcurdling 666",
+    //     "becameHauntedDate":"1762-12-24 00:00",
+    //     "history":"The hovel is an awful home of witches and their helpers.",
+    //     "ownerID":2
+    // }
+
+
+    houseFactory.getAllHouses(
+        function (response) {
+            $scope.houses = response.data;
+        },
+        $rootScope.unsuccessfulResponse
+    );
+
+    $scope.create = function() {
+        ghostFactory.createGhost(test,//$scope.ghost,
+            function (response) {
+                $scope.ghost = response.data;
+                $location.path("/ghosts");
+            },
+            $rootScope.unsuccessfulResponse
+        );
+    };
+});
+
+
 /**
  * ABILITIES
  * ABILITIES

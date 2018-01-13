@@ -18,6 +18,8 @@
                     <th></th>
                     <th>NAME</th>
                     <th>LIVES IN</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +27,15 @@
                     <td scope="row">{{ghost.id}}</td>
                     <td scope="row"><a ng-href="#!/ghosts/{{ghost.id}}">{{ghost.name}}</a></td>
                     <td scope="row">{{ghost.house.name}}</td>
+                    <td>
+                        <button ng-click="deleteGhost(ghost)" type="submit" class="btn btn-primary">Delete</button>
+                    </td>
+                    <td>
+                        <a href="#!/ghosts/update/{{ghost.id}}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Update
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
